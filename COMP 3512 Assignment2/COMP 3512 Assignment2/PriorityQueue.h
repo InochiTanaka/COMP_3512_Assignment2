@@ -1,4 +1,5 @@
 #pragma once
+// Legacy
 #ifndef __ASN2_PRIORITYQUE_H__
 #define __ASN2_PRIORITYQUE_H__
 
@@ -47,7 +48,6 @@ public:
 
 private:
 	void Update();
-
 
 private:
 	std::deque< std::deque<Patient> > mPriority; // 2D Deque

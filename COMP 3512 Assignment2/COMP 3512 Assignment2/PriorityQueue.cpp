@@ -42,7 +42,10 @@ PriorityQueue::~PriorityQueue()
 void 
 PriorityQueue::AddPatient(Patient data)
 {
-
+	// Iterate through to see if patient is already added
+	// Check Catagory Level
+	// Addes to the end of the Catagory Level
+	// 
 }
 
 //------------------------------------------------------------------------------------------------------------------------
