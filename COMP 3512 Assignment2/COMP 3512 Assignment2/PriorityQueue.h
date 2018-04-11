@@ -18,9 +18,10 @@
 
 #include <string.h>
 #include <deque>
+#include "Patient.h"
 
 // foward decleration
-class Patient;	
+//class Patient;	
 
 //----------------------------------------------------------------------------------------------------
 //-- Class Declerations ------------------------------------------------------------------------------
