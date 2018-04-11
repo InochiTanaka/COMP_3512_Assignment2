@@ -2,6 +2,8 @@
 
 int main() 
 {
-	PriorityQueue test;
+	//PriorityQueue test;
+	std::cout << input();
+	
 	return 0;
 }

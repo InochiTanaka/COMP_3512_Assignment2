@@ -1,8 +1,12 @@
 #pragma once
 #include<iostream>
 #include <string>
-#include <ctime>
 #include <stdio.h>
+
+#include <iomanip>
+#include <ctime>
+#include <time.h>
+#include <stdlib.h>
 
 struct Patient
 {
@@ -35,6 +39,8 @@ class PriorityQueue
 		bool Load(Patient data);
 		void Paint(Patient data);
 		void Exit();
+
+		bool input();
 };
 
 PriorityQueue::PriorityQueue()
@@ -92,4 +98,106 @@ void PriorityQueue::Paint(Patient data)
 void PriorityQueue::Exit()
 {
 	exit(1);
+}
+
+
+bool input()
+{
+
+	int MAX_RESERVATION_MONTH = 3;
+	int NUM_MONTH_ON_YEAR = 12;
+
+	struct Patient patient;
+
+	int inputYear;
+	int inputMonth;
+	int inputDay;
+
+	//Input Name
+	patient.firstName = "Inochi"; //any need check function
+	patient.lastName = "Tanaka"; //any need check function
+
+	//Input symptoms
+	patient.symptoms = "none"; //any need check function
+
+	//Input category of seriousness
+	patient.categorySeriousness = 6; //any need check function
+
+
+	//Input reservation date
+	std::cout << "Input reservation Year: ";
+	std::cin >> inputYear;
+
+	std::cout << "Input reservation Month: ";
+	std::cin >> inputMonth;
+
+	std::cout << "Input reservation Day: ";
+	std::cin >> inputDay;
+
+	struct tm now;
+
+	time_t longtime = time(NULL);
+
+	localtime_s(&now, &longtime);
+
+	int currentYear = now.tm_year + 1900;
+	int currentMonth = now.tm_mon + 1;
+	int currentDay = now.tm_mday;
+
+	//int currentYear = 2018;
+	//int currentMonth = 12;
+	//int currentDay = 1;
+
+	if (currentYear == inputYear)
+	{
+		if (currentMonth == inputMonth)
+		{
+			if (currentDay <= inputDay)
+			{
+				//Execute add and return true
+				patient.year = inputYear;
+				patient.month = inputMonth;
+				patient.day = inputDay;
+				return true;
+			}
+		}
+		else if ((currentMonth < inputMonth && currentMonth + MAX_RESERVATION_MONTH >= inputMonth))
+		{
+			if (currentMonth + MAX_RESERVATION_MONTH == inputMonth
+				&& currentDay < inputDay)
+			{
+				//Execute add and return true
+				return false;
+			}
+			//Execute add and return true
+			patient.year = inputYear;
+			patient.month = inputMonth;
+			patient.day = inputDay;
+			return true;
+		}
+		//retrun fail
+		return false;
+	}
+	else if (currentYear + 1 == inputYear)
+	{
+		if (currentMonth
+			- NUM_MONTH_ON_YEAR + MAX_RESERVATION_MONTH
+			>= inputMonth)
+		{
+			if (currentDay >= inputDay)
+			{
+				//Execute add and return true
+				patient.year = inputYear;
+				patient.month = inputMonth;
+				patient.day = inputDay;
+				return true;
+			}
+		}
+
+		//retrun fail
+		return false;
+	}
+
+	//retrun fail
+	return false;
 }
