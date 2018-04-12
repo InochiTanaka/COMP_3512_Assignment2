@@ -5,7 +5,7 @@
 //	A Class holds all Patient Data and Condition for the ER
 //----------------------------------------------------------------------------------------------------
 //	Inochi Tanaka		Joseph Yang
-//		A00978984		A00950913
+//	A00978984			A00950913
 //====================================================================================================
 
 //----------------------------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ public:
 	std::string	GetFullName()		{ return mName.FirstName + ' ' + mName.SecondName + ' '+ mName.LastName; }
 	int GetPIN()					{ return mPIN; }
 	int GetAdmissionDate()			{ return mAdmissionTime; }
-
+	int GetPriorityLevel()			{ return 0; }
 	void SetName(std::string first, std::string middle, std::string last) 
 	{
 		mName.FirstName = first;

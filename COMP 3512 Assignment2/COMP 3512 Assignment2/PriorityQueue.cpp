@@ -9,10 +9,14 @@
 
 #include "PriorityQueue.h"
 #include "Patient.h"
+#include "PriorityLevel.h"
 
 //------------------------------------------------------------------------------------------------------------------------
 //-- Class Definitions ---------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------
+#define LIST_ITERATOR(x, y) for (int x = 0; x < mPatientList.size(); ++x) for (int y = 0; y < mPatientList[x].size(); ++y)
+using namespace std; // safe to call in this cpp
+
 
 //------------------------------------------------------------------------------------------------------------------------
 //	@	PriorityQueue::PriorityQueue()
@@ -42,10 +46,18 @@ PriorityQueue::~PriorityQueue()
 void 
 PriorityQueue::AddPatient(Patient data)
 {
+	int PIN = data.GetPIN();
+	bool flag = false;
+
 	// Iterate through to see if patient is already added
+	for (int prioritylevel = PriorityLevel::CRITICAL; prioritylevel != PriorityLevel::END; ++prioritylevel)
+		for (int i = 0; i < mPatientList[prioritylevel].size(); ++i) 
+			if (mPatientList[prioritylevel][i].GetPIN() == PIN)
+				flag = true;
+
 	// Check Catagory Level
-	// Addes to the end of the Catagory Level
-	// 
+	if (flag)
+		mPatientList[data.GetPriorityLevel()].push_back(data);	// Addes to the end of the Catagory Level
 }
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -56,6 +68,7 @@ PriorityQueue::AddPatient(Patient data)
 void 
 PriorityQueue::RemovePatient(Patient data)
 {
+	
 }
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -88,4 +101,10 @@ Patient
 PriorityQueue::GetPatient(std::string name)
 {
 	return Patient();
+}
+
+PaitentListIterator 
+PriorityQueue::Seek()
+{
+
 }
