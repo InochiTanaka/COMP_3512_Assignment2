@@ -1,95 +1,41 @@
 #pragma once
+
+#include "Patient.h"
+
 #include<iostream>
 #include <string>
-#include <ctime>
 #include <stdio.h>
 
-struct Patient
-{
-	public:
-		std::string firstName;
-		std::string middleName;
-		std::string lastName;
+#include <iomanip>
+#include <ctime>
+#include <time.h>
+#include <stdlib.h>
 
-		int year;
-		int month;
-		int day;
-		int hour;
-		int min;
+#include <string>
+#include <cstring>
+#include <sstream>
 
-		int personalNum;
-		std::string symptoms;
-		int categorySeriousness;
-};
+#define PIN_LENGTH = 8;
+#define MAX_RESERVATION_MONTH = 3;
+#define NUM_MONTH_ON_YEAR = 12;
+
 
 class PriorityQueue 
 {
 	private:
+		static const int days_in_regular_year[];
+		static const int days_in_leap_year[];
 
 	public:
-		PriorityQueue();
-		void Add(Patient data);
-		Patient Get();
-		bool ChangeCategory(Patient data, int categoryNum);
-		bool Save();
-		bool Load(Patient data);
-		void Paint(Patient data);
-		void Exit();
+		bool input();
+		Patient inputRegisterTime(Patient p);
+		time_t getAdmissionTime(int y, int mon, int d, int h, int min);
+		Patient inputPatientName(Patient p);
+		Patient inputPatientBirthday(Patient p);
+		Patient inputPatientPIN(Patient p);
+		Patient inputPatientSymptoms(Patient p);
+		Patient inputPatientCategory(Patient p);
+		bool checkValidBirthDay(int y, int m, int d);
+		bool checkValidTime(int h, int min);
 };
 
-PriorityQueue::PriorityQueue()
-{
-	struct Patient patient;
-
-	patient.firstName = "Inochi";
-	patient.lastName = "Tanaka";
-
-	patient.year = 2018;
-	patient.month = 5;
-	patient.day = 20;
-	patient.hour = 6;
-	patient.min = 0;
-
-	patient.symptoms = "none";
-
-	patient.categorySeriousness = 6;
-
-	Paint(patient);
-
-}
-
-void PriorityQueue::Add(Patient data)
-{
-}
-
-Patient PriorityQueue::Get()
-{
-	return Patient();
-}
-
-bool PriorityQueue::ChangeCategory(Patient data, int categoryNum)
-{
-	return false;
-}
-
-bool PriorityQueue::Save()
-{
-	return false;
-}
-
-bool PriorityQueue::Load(Patient data)
-{
-	return false;
-}
-
-void PriorityQueue::Paint(Patient data)
-{
-	std::cout << "First Name :\t" << data.firstName << "\n"
-		<< "Middle Name :\t" << data.middleName << "\n"
-		<< "Last Name :\t" << data.lastName << "\n";
-}
-
-void PriorityQueue::Exit()
-{
-	exit(1);
-}

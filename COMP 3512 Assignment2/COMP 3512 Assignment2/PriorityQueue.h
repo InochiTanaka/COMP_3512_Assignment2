@@ -9,7 +9,7 @@
 //	A Class that Mimics a Priority Que, but with assignment specific Optimization
 //----------------------------------------------------------------------------------------------------
 //	Inochi Tanaka		Joseph Yang
-//						A00950913
+//			A00978984			A00950913
 //====================================================================================================
 
 //----------------------------------------------------------------------------------------------------
@@ -18,10 +18,11 @@
 
 #include <string.h>
 #include <deque>
+#include "Patient.h"
 #include <vector>
 
 // foward decleration
-class Patient;	
+//class Patient;	
 
 typedef std::vector<std::deque<Patient>>::iterator PaitentListIterator;
 typedef std::deque<Patient>::iterator PaitentIterator;

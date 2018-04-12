@@ -29,17 +29,29 @@ public:
 	std::string GetMiddleName()		{ return mName.SecondName; }
 	std::string GetLastName()		{ return mName.LastName; }
 	std::string	GetFullName()		{ return mName.FirstName + ' ' + mName.SecondName + ' '+ mName.LastName; }
+	std::string GetSymptoms()		{ return mSymptoms; }
+	std::string GetCategory()		{ return mSymptoms; }
+	int GetBirthYear()				{ return mBday.Year; }
+	int GetBirthMonth()				{ return mBday.Month; }
+	int GetBirthDay()				{ return mBday.Day; }
 	int GetPIN()					{ return mPIN; }
-	int GetAdmissionDate()			{ return mAdmissionTime; }
-	int GetPriorityLevel()			{ return 0; }
+	std::string GetAdmissionDate()			{ return mAdmissionTime; }
+
 	void SetName(std::string first, std::string middle, std::string last) 
 	{
 		mName.FirstName = first;
 		mName.SecondName = middle;
 		mName.LastName = last;
 	}
-	void SetPIN(int data)			{ mPIN = data; }
-	int SetAdmissionDate(int data)	{ mAdmissionTime = data; }
+	void SetPIN(int data)					{ mPIN = data; }
+
+	void SetBirthYear(int year)				{ mBday.Year = year; }
+	void SetBirthMonth(int month)			{ mBday.Month = month; }
+	void SetBirthDay(int day)				{ mBday.Day = day; }
+
+	void SetAdmissionDate(std::string data)			{ mAdmissionTime = data; }
+	void SetSymptoms(std::string symptoms)	{ mSymptoms = symptoms; }
+	void SetCategory(int category)			{ mCategory = category; }
 
 private:
 	struct Name { 
@@ -54,7 +66,10 @@ private:
 		int Day;
 	} mBday;
 
-	int mAdmissionTime; // 24h format, 4 digit
+	std::string mSymptoms;
+	int mCategory;
+
+	std::string mAdmissionTime; // 24h format, 4 digit
 
 	int mPIN;
 
