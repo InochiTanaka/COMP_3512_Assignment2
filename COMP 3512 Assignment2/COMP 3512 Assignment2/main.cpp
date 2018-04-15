@@ -26,7 +26,7 @@ bool PriorityQueue::input()
 	//Input symptoms
 	patient = inputPatientSymptoms(patient);
 
-	//Input registered time
+	////Input registered time
 	patient = inputRegisterTime(patient);
 
 	//Input category of seriousness
@@ -122,6 +122,8 @@ Patient PriorityQueue::inputPatientBirthday(Patient p)
 
 	} while (!checkResult);
 
+	std::cin.clear();
+
 	p.SetBirthYear(inputYear);
 	p.SetBirthMonth(inputMonth);
 	p.SetBirthDay(inputDay);
@@ -138,9 +140,13 @@ Patient PriorityQueue::inputPatientPIN(Patient p)
 		std::cout << "Input Patient's Personal Healthcare Number(PIN): ";
 		std::cin >> inputPIN;
 
+		//inputFirstName >> inputLastName >> inputMiddleName;
+
+		std::stringstream ss(inputPIN);
+
 		if (inputPIN.length() != 8)
 		{
-			std::cout << "input PIN is invalid : the length of PIN should be 8 numbers";
+			std::cout << "input PIN is invalid : the length of PIN should be 8 numbers\n";
 		}
 	} while (inputPIN.length() != 8);
 
@@ -153,7 +159,8 @@ Patient PriorityQueue::inputPatientSymptoms(Patient p)
 	std::string inputSymptoms;
 
 	std::cout << "Input Patient's Symptoms: ";
-	std::cin >> inputSymptoms;
+	getline(std::cin, inputSymptoms);
+	std::stringstream ss(inputSymptoms);
 
 	p.SetSymptoms(inputSymptoms);
 	return p;
@@ -165,13 +172,14 @@ Patient PriorityQueue::inputPatientCategory(Patient p)
 
 	do
 	{
-		std::cout << "Input Patient's Number of Seriousness's Category: \n";
+		std::cout << "Category List of Seriousness :\n";
 		std::cout << "1 : Critical and life-threatening, requires immediate care \n";
 		std::cout << "2 : Critical, requires care every soon \n";
 		std::cout << "3 : Serious, requires care 'soon' \n";
 		std::cout << "4 : Serious \n";
 		std::cout << "5 : Non-serious \n";
-		std::cout << "6 : Not a priority \n";
+		std::cout << "6 : Not a priority \n" << "\n";
+		std::cout << "Input Patient's Number of Seriousness's Category: ";
 
 		std::cin >> categorySeriousness;
 
@@ -190,6 +198,10 @@ Patient PriorityQueue::inputRegisterTime(Patient p)
 {
 	int inputHour;
 	int inputMin;
+
+	std::string timeString;
+	std::string hourString;
+	std::string minString;
 
 	bool checkResult;
 
@@ -211,12 +223,28 @@ Patient PriorityQueue::inputRegisterTime(Patient p)
 
 	} while (!checkResult);
 
-	std::cout << inputHour << "\n";
-	std::cout << inputMin << "\n";
+	std::cin.clear();
 
-	std::string timeString = std::to_string(inputHour) +":"+ std::to_string(inputMin);
+	if (inputHour < 10)
+	{
+		hourString = "0" + std::to_string(inputHour);
+	}
+	else
+	{
+		hourString = std::to_string(inputHour);
+	}
 
-	std::cout << timeString << "\n";
+	if (inputMin < 10)
+	{
+		minString = "0" + std::to_string(inputMin);
+	}
+	else
+	{
+		minString = std::to_string(inputMin);
+	}
+
+	timeString = hourString +":"+ minString;
+
 	p.SetAdmissionDate(timeString);
 
 	return p;
@@ -268,23 +296,26 @@ bool PriorityQueue::checkValidTime(int h, int min)
 	time_t longtime = time(NULL);
 	localtime_s(&now, &longtime);
 
-	int currentYear = now.tm_year;
-	int currentMonth = now.tm_mon;
+	int currentYear = now.tm_year + 1900;
+	int currentMonth = now.tm_mon + 1;
 	int currentDay = now.tm_mday;
 	int currentHour = now.tm_hour;
 	int currentMin = now.tm_min;
 
 	//Check input time is valid like between 00:00 and 23:59
-	if ((0 > h && h < 23) || (0 > min && min < 59)) 
+	if ((h < 0 || 23 < h) || (min < 0 || 59 < min))
 	{
 		std::cout << " input time is invalid : the input hour should be 0 - 23, input minutes should be 0 - 59 \n";
 		return false;
 	}
 
+	//std::cout << getAdmissionTime(currentYear, currentMonth, currentDay, currentHour, currentMin) << "\n";
+	//std::cout << getAdmissionTime(currentYear, currentMonth, currentDay, h, min) << "\n";
+
 	//Check input date/time is at the day of "MAX_RESERVATION_MONTH" later
-	if (getAdmissionTime(currentYear, currentMonth, currentDay, currentHour, currentMin) > getAdmissionTime(currentYear, currentMonth, currentDay, h, min))
+	if (getAdmissionTime(currentYear, currentMonth, currentDay, currentHour, currentMin) < getAdmissionTime(currentYear, currentMonth, currentDay, h, min))
 	{
-		std::cout << " input time is invalid : the time is in past \n";
+		std::cout << " input time is invalid : the time is in the future \n";
 		return false;
 	}
 
@@ -294,7 +325,7 @@ bool PriorityQueue::checkValidTime(int h, int min)
 
 time_t PriorityQueue::getAdmissionTime(int y, int mon, int d, int h, int min)
 {
-	struct tm timeStruct = { min, h, d, d, mon, y - 1900 };
+	struct tm timeStruct = {0, min, h, d, mon - 1, y - 1900 };
 	time_t time = std::mktime(&timeStruct);
 
 	return time;
