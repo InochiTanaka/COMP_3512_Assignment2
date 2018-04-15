@@ -19,9 +19,13 @@
 #include <string.h>
 #include <deque>
 #include "Patient.h"
+#include <vector>
 
 // foward decleration
 //class Patient;	
+
+typedef std::vector<std::deque<Patient>>::iterator PaitentListIterator;
+typedef std::deque<Patient>::iterator PaitentIterator;
 
 //----------------------------------------------------------------------------------------------------
 //-- Class Declerations ------------------------------------------------------------------------------
@@ -49,9 +53,10 @@ public:
 
 private:
 	void Update();
+	PaitentListIterator Seek();
 
 private:
-	std::deque< std::deque<Patient> > mPriority; // 2D Deque
+	std::vector< std::deque<Patient> > mPatientList; // 2D Deque
 
 };
 

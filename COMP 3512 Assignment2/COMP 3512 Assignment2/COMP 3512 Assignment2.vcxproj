@@ -122,6 +122,7 @@
   <ItemGroup>
     <ClInclude Include="Header.hpp" />
     <ClInclude Include="Patient.h" />
+    <ClInclude Include="PriorityLevel.h" />
     <ClInclude Include="PriorityQueue.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
