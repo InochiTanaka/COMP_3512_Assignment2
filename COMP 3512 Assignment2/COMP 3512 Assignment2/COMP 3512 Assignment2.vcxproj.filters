@@ -35,5 +35,8 @@
     <ClInclude Include="PriorityLevel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Triage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -124,6 +124,7 @@
     <ClInclude Include="Patient.h" />
     <ClInclude Include="PriorityLevel.h" />
     <ClInclude Include="PriorityQueue.h" />
+    <ClInclude Include="Triage.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

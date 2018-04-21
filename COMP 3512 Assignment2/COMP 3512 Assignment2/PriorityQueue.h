@@ -39,6 +39,7 @@ public:
 
 public:
 	// Mutators 
+	// AddToList
 	void AddPatient(Patient data);
 	void RemovePatient(Patient data);
 	Patient UpdatePatient(Patient data);
