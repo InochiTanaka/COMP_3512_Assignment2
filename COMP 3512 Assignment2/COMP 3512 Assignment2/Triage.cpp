@@ -22,6 +22,10 @@ void Triage::Insert(Patient data)
 {
 	PriorityLevel eStatus = DefineCondition(data);
 	mHospitalList.AddToList(data, eStatus);
+
+	mHospitalList.UpdateTime(data.GetAdmissionTime());		// Updates List's Time
+
+	mHospitalList.UpdateList();					// Update List 
 	// Print !!
 }
 
@@ -33,7 +37,7 @@ void Triage::Insert(Patient data)
 void Triage::Remove(Patient data) 
 {
 	mHospitalList.RemoveFromList(data);
-	mHospitalList.UpdateList();		// Fixes list after change, if needed
+	//mHospitalList.UpdateList();		// Fixes list after change, if needed
 	// Print !!
 }
 

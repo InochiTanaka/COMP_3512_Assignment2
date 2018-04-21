@@ -17,7 +17,7 @@
 //-- Class Definitions ---------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------
 
-#define LIST_ITERATOR(x, y) for(int x = PriorityLevel::CRITICAL; x != PriorityLevel::END; ++x) for(int y = 0; y < mPatientList[x].size(); ++y) // –‚–@‚Å‚·
+#define LIST_ITERATOR(x, y) for(int x = PriorityLevel::CRITICAL; x != PriorityLevel::END; ++x) for(int y = 0; y < mPatientList[x].size(); ++y)  // –‚–@‚Å‚·
 using namespace std; // safe to call in this cpp
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ PriorityQueue::~PriorityQueue()
 //------------------------------------------------------------------------------------------------------------------------
 //	Addeds a patient to the queue
 //------------------------------------------------------------------------------------------------------------------------
-void 
+void
 PriorityQueue::AddToList(Patient data, PriorityLevel level)
 {
 	std::string PIN = data.GetPIN();
@@ -53,9 +53,9 @@ PriorityQueue::AddToList(Patient data, PriorityLevel level)
 
 	// Iterate through to see if patient is already added
 	for (int prioritylevel = PriorityLevel::CRITICAL; prioritylevel != PriorityLevel::END; ++prioritylevel)
-		for (int i = 0; i < mPatientList[prioritylevel].size(); ++i) 
-			if ( mPatientList[prioritylevel][i].GetPIN().compare(PIN)  // Triple Confirmation it if it's the same patient
-				&& ( mPatientList[prioritylevel][i].GetFullName().compare(data.GetFullName()) && mPatientList[prioritylevel][i].GetAdmissionDate() == data.GetAdmissionDate() ) )
+		for (int i = 0; i < mPatientList[prioritylevel].size(); ++i)
+			if (mPatientList[prioritylevel][i].GetPIN().compare(PIN)  // Triple Confirmation it if it's the same patient
+				&& (mPatientList[prioritylevel][i].GetFullName().compare(data.GetFullName()) && mPatientList[prioritylevel][i].GetAdmissionTime() == data.GetAdmissionTime()))
 				fDuplicatePatient = true;
 
 
@@ -74,10 +74,7 @@ PriorityQueue::AddToList(Patient data, PriorityLevel level)
 	// ASN2 #9 Requirement
 	//	Removing After Adding
 
-	// Latest Patient is Latest Time
-	mCurrentTime = GetTime(data.GetAdmissionDate());
-
-	Update();
+	UpdateList();
 
 	//	mPatientList[data.GetPriorityLevel()].push_back(data);	// Addes to the end of the Catagory Level
 }
@@ -87,15 +84,14 @@ PriorityQueue::AddToList(Patient data, PriorityLevel level)
 //------------------------------------------------------------------------------------------------------------------------
 //	Removes a patient from the Queue
 //------------------------------------------------------------------------------------------------------------------------
-void 
+void
 PriorityQueue::RemoveFromList(Patient data)
 {
 	string IDHolder = data.GetPIN();
 	// Seek by ID No
 	LIST_ITERATOR(x, y)
-	{
 		IDHolder.compare(mPatientList[x][y].GetPIN());
-	}
+
 }
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -116,7 +112,7 @@ PriorityQueue::UpdatePatient(Patient data)
 //	After every 
 //------------------------------------------------------------------------------------------------------------------------
 void 
-PriorityQueue::Update()
+PriorityQueue::UpdateList()
 {
 	// Remove the First from the list
 	for (int i = PriorityLevel::CRITICAL; i < PriorityLevel::END; ++i)
@@ -129,13 +125,11 @@ PriorityQueue::Update()
 		}
 	}
 
+	// Update Patient's Time
 	LIST_ITERATOR(x, y)
-	{
-		mPatientList[x][y].SetTimeDuration(TimeCheck(GetTime(mPatientList[x][y].GetAdmissionDate())));
-	}
+		mPatientList[x][y].SetTimeDuration(TimeCheck(GetTime(mPatientList[x][y].GetAdmissionTime())));
 
 	FixList();
-
 }
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -143,7 +137,20 @@ PriorityQueue::Update()
 //------------------------------------------------------------------------------------------------------------------------
 //	Iterates through the List and Fixes list
 //------------------------------------------------------------------------------------------------------------------------
-void PriorityQueue::FixList() 
+void 
+PriorityQueue::FixList() 
+{
+	// Checks if All Priority Levels are in the Correct Array
+	// Checks if Any Patient Needs Promotion
+}
+
+//------------------------------------------------------------------------------------------------------------------------
+//	@	void PriorityQueue::Promote()
+//------------------------------------------------------------------------------------------------------------------------
+//	Iterates through the List and Fixes list
+//------------------------------------------------------------------------------------------------------------------------
+void 
+PriorityQueue::Promote(Patient data)
 {
 
 }
@@ -179,10 +186,34 @@ Patient
 PriorityQueue::GetPatient(std::string name)
 {
 	LIST_ITERATOR(priority, x)
-	{
 		if (name.compare(mPatientList[priority][x].GetFullName()) == 0)
 			return Patient();
+}
+
+//------------------------------------------------------------------------------------------------------------------------
+//	@	Void PriorityQueue::GetTime(std::string string)
+//------------------------------------------------------------------------------------------------------------------------
+//	Converts String to Seperate Hour and Minutes and stores it in List's Time
+//------------------------------------------------------------------------------------------------------------------------
+void
+PriorityQueue::UpdateTime(std::string string)
+{
+	using namespace std;
+	vector<int> temp;
+
+	stringstream ss(string);
+
+	int i;
+
+	while (ss >> i)
+	{
+		if (ss.peek() == ':')
+			ss.ignore();
+
+		temp.push_back(i);
 	}
+
+	mCurrentTime = temp;
 }
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -190,7 +221,7 @@ PriorityQueue::GetPatient(std::string name)
 //------------------------------------------------------------------------------------------------------------------------
 //	Converts String to Seperate Hour and Minutes
 //------------------------------------------------------------------------------------------------------------------------
-vector<int> 
+vector<int>
 PriorityQueue::GetTime(std::string string)
 {
 	using namespace std;
@@ -210,6 +241,7 @@ PriorityQueue::GetTime(std::string string)
 
 	return temp;
 }
+
 //PaitentListIterator 
 //PriorityQueue::Seek()
 //{

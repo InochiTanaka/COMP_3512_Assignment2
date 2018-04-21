@@ -44,27 +44,30 @@ public:
 	//	Mutators -----------------------------------------------------------------------
 	void AddToList(Patient data, PriorityLevel level);
 	void RemoveFromList(Patient data);
+
 	Patient UpdatePatient(Patient data);
-	
+	void UpdateTime(std::string string);
+
 	//	Accessors ----------------------------------------------------------------------
 	Patient GetPatient(std::string name);
-	void UpdateList() { }
+	void UpdateList();
 
 
 
 public:
 	// Local Functions
-	bool Save();
-	bool Load(Patient data);
-	void Paint(Patient data);
-	void Exit();
+	bool Save() {}
+	bool Load() {}
+	void Paint() {}
+	void Exit() {}
 
 private:
 	int TimeCheck(std::vector<int> time);
 	std::vector<int> GetTime(std::string string);
-	void Update();									// Standard Update After External Input / output
+
+										// Standard Update After External Input / output
 	void FixList();									// Update After Internal Alterations
-	void Promote();
+	void Promote(Patient data);
 	//PaitentListIterator Seek();
 
 private:

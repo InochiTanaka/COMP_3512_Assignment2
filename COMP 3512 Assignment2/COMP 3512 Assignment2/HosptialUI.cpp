@@ -351,6 +351,6 @@ void HosptialUI::printPatient(Patient p)
 
 	std::cout << "Personal Healthcare Number : " << p.GetPIN() << "\n";
 	std::cout << "Symptoms : " << p.GetSymptoms() << "\n";
-	std::cout << "Registered time : " << p.GetAdmissionDate() << "\n";
+	std::cout << "Registered time : " << p.GetAdmissionTime() << "\n";
 	std::cout << "Category of seriousness : " << p.GetCategory() + 1 << "\n";
 }

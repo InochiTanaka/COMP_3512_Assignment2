@@ -32,17 +32,7 @@ public:
 
 public:		
 
-	std::string GetFirstName()		{ return mName.FirstName; }
-	std::string GetMiddleName()		{ return mName.SecondName; }
-	std::string GetLastName()		{ return mName.LastName; }
-	std::string	GetFullName()		{ return mName.FirstName + ' ' + mName.SecondName + ' '+ mName.LastName; }
-	std::string GetSymptoms()		{ return mSymptoms; }
-	std::string GetCategory()		{ return mSymptoms; }
-	int GetBirthYear()				{ return mBday.Year; }
-	int GetBirthMonth()				{ return mBday.Month; }
-	int GetBirthDay()				{ return mBday.Day; }
-	std::string  GetPIN()					{ return mPIN; }
-	std::string GetAdmissionDate()			{ return mAdmissionTime; }
+	// Accessor ------------------------------------------------------------------------------------
 
 	// Name
 	std::string GetFirstName()			{ return mName.FirstName; }
@@ -55,16 +45,18 @@ public:
 	int GetBirthYear()					{ return mBday.Year; }
 	int GetBirthMonth()					{ return mBday.Month; }
 	int GetBirthDay()					{ return mBday.Day; }
-	std::string GetAdmissionDate()		{ return mAdmissionTime; }
+	std::string GetAdmissionTime()		{ return mAdmissionTime; }
 
 
 	// Data
-	PriorityLevel GetCategory()			{ return mCategory; }
+	int GetCategory()					{ return (int)mCategory; }
 
 	std::string GetPIN()				{ return mPIN; }
 	std::string GetSymptoms()			{ return mSymptoms; }
 
 	int GetTimePassed()					{ return mTimePassed; }
+
+
 	// Mutators ------------------------------------------------------------------------------------
 
 	// Name
@@ -84,7 +76,7 @@ public:
 
 
 	// Data
-	void SetCategory(PriorityLevel category)	{ mCategory = category; }
+	void SetCategory(int category)				{ mCategory = (PriorityLevel)category; }
 
 	void SetPIN(std::string data)				{ mPIN = data; }
 	void SetSymptoms(std::string symptoms)		{ mSymptoms = symptoms; }
