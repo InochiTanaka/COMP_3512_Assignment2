@@ -35,7 +35,7 @@ public:		//	Accessors ----------------------------------------------------------
 	std::string GetLastName()		{ return mName.LastName; }
 	std::string	GetFullName()		{ return mName.FirstName + ' ' + mName.SecondName + ' '+ mName.LastName; }
 	std::string GetSymptoms()		{ return mSymptoms; }
-	std::string GetCategory()		{ return mSymptoms; }
+	int GetCategory()				{ return mCategory; }
 	int GetBirthYear()				{ return mBday.Year; }
 	int GetBirthMonth()				{ return mBday.Month; }
 	int GetBirthDay()				{ return mBday.Day; }
