@@ -34,7 +34,7 @@ public:
 	int GetBirthYear()				{ return mBday.Year; }
 	int GetBirthMonth()				{ return mBday.Month; }
 	int GetBirthDay()				{ return mBday.Day; }
-	int GetPIN()					{ return mPIN; }
+	std::string  GetPIN()					{ return mPIN; }
 	std::string GetAdmissionDate()			{ return mAdmissionTime; }
 
 	void SetName(std::string first, std::string middle, std::string last) 
@@ -43,7 +43,7 @@ public:
 		mName.SecondName = middle;
 		mName.LastName = last;
 	}
-	void SetPIN(int data)					{ mPIN = data; }
+	void SetPIN(std::string data)					{ mPIN = data; }
 
 	void SetBirthYear(int year)				{ mBday.Year = year; }
 	void SetBirthMonth(int month)			{ mBday.Month = month; }
@@ -71,6 +71,6 @@ private:
 
 	std::string mAdmissionTime; // 24h format, 4 digit
 
-	int mPIN;
+	std::string mPIN;
 
 };

@@ -6,33 +6,44 @@ const int PriorityQueue::days_in_leap_year[] = { 0, 31, 29, 31, 30, 31, 30, 31, 
 int main() 
 {
 	PriorityQueue test;
-	std::cout<< test.input();
+	
+	std::cout << test.addSequence();
+
 	return 0;
 }
 
-bool PriorityQueue::input()
+bool PriorityQueue::addSequence()
 {
-	Patient patient;
+	Patient patient = input();
+	//patientList.push_back(patient);
+	//mTestList.push_back(patient);
+
+	return false;
+}
+
+Patient PriorityQueue::input()
+{
+	Patient p;
 
 	//Input Name
-	patient = inputPatientName(patient);
+	p = inputPatientName(p);
 
 	//Input birthday
-	patient = inputPatientBirthday(patient);
+	p = inputPatientBirthday(p);
 
 	//Input personal healthcare number
-	patient = inputPatientPIN(patient);
+	p = inputPatientPIN(p);
 
 	//Input symptoms
-	patient = inputPatientSymptoms(patient);
+	p = inputPatientSymptoms(p);
 
-	////Input registered time
-	patient = inputRegisterTime(patient);
+	//Input registered time
+	p = inputRegisterTime(p);
 
 	//Input category of seriousness
-	patient = inputPatientCategory(patient);
+	p = inputPatientCategory(p);
 
-	return true;
+	return p;
 }
 
 Patient PriorityQueue::inputPatientName(Patient p)
@@ -150,7 +161,7 @@ Patient PriorityQueue::inputPatientPIN(Patient p)
 		}
 	} while (inputPIN.length() != 8);
 
-	p.SetPIN(std::stoi(inputPIN));
+	p.SetPIN(inputPIN);
 	return p;
 }
 
@@ -159,8 +170,7 @@ Patient PriorityQueue::inputPatientSymptoms(Patient p)
 	std::string inputSymptoms;
 
 	std::cout << "Input Patient's Symptoms: ";
-	getline(std::cin, inputSymptoms);
-	std::stringstream ss(inputSymptoms);
+	std::cin >> inputSymptoms;
 
 	p.SetSymptoms(inputSymptoms);
 	return p;
@@ -309,8 +319,6 @@ bool PriorityQueue::checkValidTime(int h, int min)
 		return false;
 	}
 
-	//std::cout << getAdmissionTime(currentYear, currentMonth, currentDay, currentHour, currentMin) << "\n";
-	//std::cout << getAdmissionTime(currentYear, currentMonth, currentDay, h, min) << "\n";
 
 	//Check input date/time is at the day of "MAX_RESERVATION_MONTH" later
 	if (getAdmissionTime(currentYear, currentMonth, currentDay, currentHour, currentMin) < getAdmissionTime(currentYear, currentMonth, currentDay, h, min))
@@ -329,4 +337,21 @@ time_t PriorityQueue::getAdmissionTime(int y, int mon, int d, int h, int min)
 	time_t time = std::mktime(&timeStruct);
 
 	return time;
+}
+
+void PriorityQueue::printPatient(Patient p)
+{
+	//std::cout << "Patient First Name : " << GetFirstName << "\n";
+	//std::cout << "Patient Last Name : " << p.GetLastName << "\n";
+	//std::cout << "Patient Middle Name : " << p.GetMiddleName << "\n";
+
+	//std::cout << "Patient Birthday : " 
+	//	<< p.GetBirthMonth 
+	//	<< " / " << p.GetBirthDay 
+	//	<< ", " << p.GetBirthYear << "\n";
+
+	//std::cout << "Personal Healthcare Number : " << p.GetPIN << "\n";
+	//std::cout << "Symptoms : " << p.GetSymptoms << "\n";
+	//std::cout << "Registered time : " << p.GetMiddleName << "\n";
+	//std::cout << "Category of seriousness : " << p.GetCategory << "\n";
 }

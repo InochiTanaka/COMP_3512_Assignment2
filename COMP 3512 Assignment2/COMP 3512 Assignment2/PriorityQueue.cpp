@@ -46,7 +46,7 @@ PriorityQueue::~PriorityQueue()
 void 
 PriorityQueue::AddPatient(Patient data)
 {
-	int PIN = data.GetPIN();
+	std::string PIN = data.GetPIN();
 	bool flag = false;
 
 	// Iterate through to see if patient is already added
@@ -56,8 +56,8 @@ PriorityQueue::AddPatient(Patient data)
 				flag = true;
 
 	// Check Catagory Level
-	if (flag)
-		mPatientList[data.GetPriorityLevel()].push_back(data);	// Addes to the end of the Catagory Level
+	//if (flag)
+	//	mPatientList[data.GetPriorityLevel()].push_back(data);	// Addes to the end of the Catagory Level
 }
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -103,8 +103,8 @@ PriorityQueue::GetPatient(std::string name)
 	return Patient();
 }
 
-PaitentListIterator 
-PriorityQueue::Seek()
-{
-
-}
+//PaitentListIterator 
+//PriorityQueue::Seek()
+//{
+//
+//}

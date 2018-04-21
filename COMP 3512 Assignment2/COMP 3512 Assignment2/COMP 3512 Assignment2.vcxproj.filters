@@ -29,10 +29,10 @@
     <ClInclude Include="PriorityQueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Patient.h">
+    <ClInclude Include="PriorityLevel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PriorityLevel.h">
+    <ClInclude Include="Patient.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

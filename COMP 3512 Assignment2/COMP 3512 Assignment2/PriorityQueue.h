@@ -53,11 +53,10 @@ public:
 
 private:
 	void Update();
-	PaitentListIterator Seek();
+	//PaitentListIterator Seek();
 
 private:
 	std::vector< std::deque<Patient> > mPatientList; // 2D Deque
-
 };
 
 #endif
