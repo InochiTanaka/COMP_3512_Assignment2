@@ -13,10 +13,13 @@
 
 enum PriorityLevel
 {
-	SEVERE,
 	CRITICAL,
-	MINOR,
-	END
+	CRITICAL_STABLE,
+	SEVERE,	
+	SERIOUS,
+	GOOD,
+	COMFORTABLE,
+	END	// Used for iteration loop
 };
 
 #endif

@@ -48,6 +48,8 @@ public:
 	// Accessors 
 	Patient GetPatient(std::string name);
 
+	void UpdateList() {}
+
 	// Local Functions
 	bool Save();
 	bool Load(Patient data);
@@ -59,7 +61,7 @@ private:
 	//PaitentListIterator Seek();
 
 private:
-	std::vector< std::deque<Patient> > mPatientList; // 2D Deque
+	std::deque<Patient> mPatientList[]; // 2D Deque
 };
 
 #endif

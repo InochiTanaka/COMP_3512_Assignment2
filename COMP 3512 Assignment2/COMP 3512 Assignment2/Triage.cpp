@@ -31,7 +31,9 @@ void Triage::Insert(Patient data)
 //------------------------------------------------------------------------------------------------------------------------
 void Triage::Remove(Patient data) 
 {
-
+	mHospitalList.RemoveFromList(data);
+	mHospitalList.UpdateList();		// Fixes list after change, if needed
+	// Print !!
 }
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -50,7 +52,26 @@ void Triage::Edit(Patient data)
 //------------------------------------------------------------------------------------------------------------------------
 PriorityLevel Triage::DefineCondition(Patient data) 
 {
-	return PriorityLevel::END;
+	std::string tempString = data.GetSymptoms();
+
+	if (tempString.compare("Critical and life-threatening, requires immediate care") == 0)
+		return PriorityLevel::CRITICAL;
+
+	if (tempString.compare("Critical, requires care `very soon'") == 0)
+		return PriorityLevel::CRITICAL_STABLE;
+
+	if (tempString.compare("Serious, requires care `soon'") == 0)
+		return PriorityLevel::SEVERE;
+
+	if (tempString.compare("Serious") == 0)
+		return PriorityLevel::SERIOUS;
+
+	if (tempString.compare("Non-serious") == 0)
+		return PriorityLevel::GOOD;
+
+	// If it isn't any of the above, then they are probably comfortable and/or not dying É∞(ÅLÑtÅM;)
+	return PriorityLevel::COMFORTABLE;
+
 }
 
 

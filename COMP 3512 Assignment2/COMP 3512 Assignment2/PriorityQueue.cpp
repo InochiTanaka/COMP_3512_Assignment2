@@ -15,7 +15,7 @@
 //-- Class Definitions ---------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------
 
-#define LIST_ITERATOR(x, y) for (int x = 0; x < mPatientList.size(); ++x) for (int y = 0; y < mPatientList[x].size(); ++y)
+#define LIST_ITERATOR(x, y) for(int x = PriorityLevel::CRITICAL; x != PriorityLevel::END; ++x) for(int y = 0; y < mPatientList[x].size(); ++y)
 using namespace std; // safe to call in this cpp
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -52,14 +52,27 @@ PriorityQueue::AddToList(Patient data, PriorityLevel level)
 	// Iterate through to see if patient is already added
 	for (int prioritylevel = PriorityLevel::CRITICAL; prioritylevel != PriorityLevel::END; ++prioritylevel)
 		for (int i = 0; i < mPatientList[prioritylevel].size(); ++i) 
-			if (mPatientList[prioritylevel][i].GetPIN() == PIN)
+			if ( mPatientList[prioritylevel][i].GetPIN().compare(PIN)  // Triple Confirmation it if it's the same patient
+				&& ( mPatientList[prioritylevel][i].GetFullName().compare(data.GetFullName()) && mPatientList[prioritylevel][i].GetAdmissionDate() == data.GetAdmissionDate() ) )
 				fDuplicatePatient = true;
 
-	// Check Catagory Level
+
+	// Push to the Category Level
 	if (!fDuplicatePatient)
 	{
 		mPatientList[level].push_back(data);
 	}
+	else	// Assume the Patient is updated
+	{
+		// Remove him from the list and readd him to the new level
+		RemoveFromList(data);
+		mPatientList[level].push_back(data);
+	}
+
+	// ASN2 #9 Requirement
+	//	Removing After Adding
+	Update();
+
 	//	mPatientList[data.GetPriorityLevel()].push_back(data);	// Addes to the end of the Catagory Level
 }
 
@@ -98,6 +111,16 @@ PriorityQueue::UpdatePatient(Patient data)
 void 
 PriorityQueue::Update()
 {
+	for (int i = PriorityLevel::CRITICAL; i < PriorityLevel::END; ++i)
+	{
+		// If not Empty then Pop the front, Do this only once
+		if (mPatientList[i].size() > 0)		
+		{
+			mPatientList[i].pop_front();	
+			break;
+		}
+
+	}
 }
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -108,7 +131,14 @@ PriorityQueue::Update()
 Patient
 PriorityQueue::GetPatient(std::string name)
 {
-	return Patient();
+	LIST_ITERATOR(priority, x)
+	{
+		if (name.compare(mPatientList[priority][x].GetFullName()) == 0)
+		{
+			return Patient();
+		}
+	}
+
 }
 
 //PaitentListIterator 
