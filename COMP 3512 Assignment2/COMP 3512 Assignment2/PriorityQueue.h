@@ -23,10 +23,10 @@
 #include "Patient.h"
 #include "PriorityLevel.h"
 
+
 // foward decleration
 //class Patient;	
 
-typedef std::vector<std::deque<Patient>>::iterator PaitentListIterator;
 typedef std::deque<Patient>::iterator PaitentIterator;
 
 //----------------------------------------------------------------------------------------------------
@@ -35,33 +35,46 @@ typedef std::deque<Patient>::iterator PaitentIterator;
 
 class PriorityQueue
 {
-public:
+
+public:		
+	//	Constructors -------------------------------------------------------------------
 	PriorityQueue();
 	~PriorityQueue();
-
-public:
-	// Mutators 
-	// AddToList
+	
+	//	Mutators -----------------------------------------------------------------------
 	void AddToList(Patient data, PriorityLevel level);
 	void RemoveFromList(Patient data);
+
 	Patient UpdatePatient(Patient data);
-	// Accessors 
+	void UpdateTime(std::string string);
+
+	//	Accessors ----------------------------------------------------------------------
 	Patient GetPatient(std::string name);
+	void UpdateList();
 
-	void UpdateList() {}
 
+
+public:
 	// Local Functions
-	bool Save();
-	bool Load(Patient data);
-	void Paint(Patient data);
-	void Exit();
+	bool Save() {}
+	bool Load() {}
+	void Paint() {}
+	void Exit() {}
 
 private:
-	void Update();
+	int TimeCheck(std::vector<int> time);
+	std::vector<int> GetTime(std::string string);
+
+										// Standard Update After External Input / output
+	void FixList();									// Update After Internal Alterations
+	void Promote(Patient data);
 	//PaitentListIterator Seek();
 
 private:
+	std::vector<int> mCurrentTime;
 	std::deque<Patient> mPatientList[]; // 2D Deque
+	
+
 };
 
 #endif

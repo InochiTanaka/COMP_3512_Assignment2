@@ -184,7 +184,7 @@ Patient HosptialUI::inputPatientCategory(Patient p)
 
 	} while (!checkValidCategory(categorySeriousness));
 
-	p.SetCategory(categorySeriousness - 1);
+	p.SetCategory((PriorityLevel)(categorySeriousness - 1));
 
 	return p;
 }
@@ -396,6 +396,6 @@ void HosptialUI::printPatient(Patient p)
 
 	std::cout << "Personal Healthcare Number : " << p.GetPIN() << "\n";
 	std::cout << "Symptoms : " << p.GetSymptoms() << "\n";
-	std::cout << "Registered time : " << p.GetAdmissionDate() << "\n";
+	std::cout << "Registered time : " << p.GetAdmissionTime() << "\n";
 	std::cout << "Category of seriousness : " << p.GetCategory() + 1 << "\n";
 }
