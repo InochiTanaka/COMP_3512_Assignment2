@@ -1,4 +1,7 @@
 #pragma once
+#ifndef __ASN2_PATIENT_H__
+#define __ASN2_PATIENT_H__
+
 //====================================================================================================
 //	Patient.h
 //
@@ -11,8 +14,10 @@
 //----------------------------------------------------------------------------------------------------
 //-- Dependency --------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
+
 #include <iostream>
 #include <string.h>
+
 //----------------------------------------------------------------------------------------------------
 //-- Class Declerations ------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
@@ -23,8 +28,8 @@ public:
 	Patient() {}
 	~Patient() {}
 
-public:
-	//	Accessors
+public:		//	Accessors ----------------------------------------------------------------------
+
 	std::string GetFirstName()		{ return mName.FirstName; }
 	std::string GetMiddleName()		{ return mName.SecondName; }
 	std::string GetLastName()		{ return mName.LastName; }
@@ -36,6 +41,8 @@ public:
 	int GetBirthDay()				{ return mBday.Day; }
 	std::string  GetPIN()					{ return mPIN; }
 	std::string GetAdmissionDate()			{ return mAdmissionTime; }
+
+public:		// Mutators ----------------------------------------------------------------------
 
 	void SetName(std::string first, std::string middle, std::string last) 
 	{
@@ -53,12 +60,15 @@ public:
 	void SetSymptoms(std::string symptoms)	{ mSymptoms = symptoms; }
 	void SetCategory(int category)			{ mCategory = category; }
 
-private:
+	
+private:	// Memeber Variables ----------------------------------------------------------------------
+
 	struct Name { 
 		std::string FirstName; 
 		std::string SecondName; 
 		std::string LastName;
 	} mName;
+
 	struct Birthdate 
 	{
 		int Year;
@@ -74,3 +84,5 @@ private:
 	std::string mPIN;
 
 };
+
+#endif // __ASN2_PATIENT_H__

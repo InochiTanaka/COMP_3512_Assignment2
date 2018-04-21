@@ -9,7 +9,7 @@
 //	A Class that Mimics a Priority Que, but with assignment specific Optimization
 //----------------------------------------------------------------------------------------------------
 //	Inochi Tanaka		Joseph Yang
-//			A00978984			A00950913
+//	A00978984			A00950913
 //====================================================================================================
 
 //----------------------------------------------------------------------------------------------------
@@ -18,8 +18,10 @@
 
 #include <string.h>
 #include <deque>
-#include "Patient.h"
 #include <vector>
+
+#include "Patient.h"
+#include "PriorityLevel.h"
 
 // foward decleration
 //class Patient;	
@@ -40,8 +42,8 @@ public:
 public:
 	// Mutators 
 	// AddToList
-	void AddPatient(Patient data);
-	void RemovePatient(Patient data);
+	void AddToList(Patient data, PriorityLevel level);
+	void RemoveFromList(Patient data);
 	Patient UpdatePatient(Patient data);
 	// Accessors 
 	Patient GetPatient(std::string name);

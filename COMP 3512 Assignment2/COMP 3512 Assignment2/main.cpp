@@ -1,20 +1,20 @@
 #include "Header.hpp"
 
-const int PriorityQueue::days_in_regular_year[] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-const int PriorityQueue::days_in_leap_year[] = { 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+const int PriorityQueue2::days_in_regular_year[] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+const int PriorityQueue2::days_in_leap_year[] = { 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
 // Input Class Should have a local Patient that will be passed afterwards
 
 int main() 
 {
-	PriorityQueue test;
+	PriorityQueue2 test;
 	
 	std::cout << test.addSequence();
 
 	return 0;
 }
 
-bool PriorityQueue::addSequence()
+bool PriorityQueue2::addSequence()
 {
 	Patient patient = input();
 	//patientList.push_back(patient);
@@ -23,7 +23,7 @@ bool PriorityQueue::addSequence()
 	return false;
 }
 
-Patient PriorityQueue::input()
+Patient PriorityQueue2::input()
 {
 	Patient p;
 
@@ -48,7 +48,7 @@ Patient PriorityQueue::input()
 	return p;
 }
 
-Patient PriorityQueue::inputPatientName(Patient p)
+Patient PriorityQueue2::inputPatientName(Patient p)
 {
 	std::string inputFullName;
 
@@ -107,7 +107,7 @@ Patient PriorityQueue::inputPatientName(Patient p)
 	return p;
 }
 
-Patient PriorityQueue::inputPatientBirthday(Patient p)
+Patient PriorityQueue2::inputPatientBirthday(Patient p)
 {
 	int inputYear;
 	int inputMonth;
@@ -144,7 +144,7 @@ Patient PriorityQueue::inputPatientBirthday(Patient p)
 	return p;
 }
 
-Patient PriorityQueue::inputPatientPIN(Patient p)
+Patient PriorityQueue2::inputPatientPIN(Patient p)
 {
 	std::string inputPIN;
 
@@ -167,7 +167,7 @@ Patient PriorityQueue::inputPatientPIN(Patient p)
 	return p;
 }
 
-Patient PriorityQueue::inputPatientSymptoms(Patient p)
+Patient PriorityQueue2::inputPatientSymptoms(Patient p)
 {
 	std::string inputSymptoms;
 
@@ -178,7 +178,7 @@ Patient PriorityQueue::inputPatientSymptoms(Patient p)
 	return p;
 }
 
-Patient PriorityQueue::inputPatientCategory(Patient p)
+Patient PriorityQueue2::inputPatientCategory(Patient p)
 {
 	int categorySeriousness;
 
@@ -206,7 +206,7 @@ Patient PriorityQueue::inputPatientCategory(Patient p)
 	return p;
 }
 
-Patient PriorityQueue::inputRegisterTime(Patient p)
+Patient PriorityQueue2::inputRegisterTime(Patient p)
 {
 	int inputHour;
 	int inputMin;
@@ -262,7 +262,7 @@ Patient PriorityQueue::inputRegisterTime(Patient p)
 	return p;
 }
 
-bool PriorityQueue::checkValidBirthDay(int y, int m, int d)
+bool PriorityQueue2::checkValidBirthDay(int y, int m, int d)
 {
 	//Get current time 
 	struct tm now;
@@ -301,7 +301,7 @@ bool PriorityQueue::checkValidBirthDay(int y, int m, int d)
 	return true;
 }
 
-bool PriorityQueue::checkValidTime(int h, int min)
+bool PriorityQueue2::checkValidTime(int h, int min)
 {
 	//Get current time 
 	struct tm now;
@@ -333,7 +333,7 @@ bool PriorityQueue::checkValidTime(int h, int min)
 	return true;
 }
 
-time_t PriorityQueue::getAdmissionTime(int y, int mon, int d, int h, int min)
+time_t PriorityQueue2::getAdmissionTime(int y, int mon, int d, int h, int min)
 {
 	struct tm timeStruct = {0, min, h, d, mon - 1, y - 1900 };
 	time_t time = std::mktime(&timeStruct);
@@ -341,7 +341,7 @@ time_t PriorityQueue::getAdmissionTime(int y, int mon, int d, int h, int min)
 	return time;
 }
 
-void PriorityQueue::printPatient(Patient p)
+void PriorityQueue2::printPatient(Patient p)
 {
 	//std::cout << "Patient First Name : " << GetFirstName << "\n";
 	//std::cout << "Patient Last Name : " << p.GetLastName << "\n";

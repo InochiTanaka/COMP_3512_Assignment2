@@ -14,9 +14,9 @@
 //------------------------------------------------------------------------------------------------------------------------
 //-- Class Definitions ---------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------
+
 #define LIST_ITERATOR(x, y) for (int x = 0; x < mPatientList.size(); ++x) for (int y = 0; y < mPatientList[x].size(); ++y)
 using namespace std; // safe to call in this cpp
-
 
 //------------------------------------------------------------------------------------------------------------------------
 //	@	PriorityQueue::PriorityQueue()
@@ -44,19 +44,22 @@ PriorityQueue::~PriorityQueue()
 //	Addeds a patient to the queue
 //------------------------------------------------------------------------------------------------------------------------
 void 
-PriorityQueue::AddPatient(Patient data)
+PriorityQueue::AddToList(Patient data, PriorityLevel level)
 {
 	std::string PIN = data.GetPIN();
-	bool flag = false;
+	bool fDuplicatePatient = false;
 
 	// Iterate through to see if patient is already added
 	for (int prioritylevel = PriorityLevel::CRITICAL; prioritylevel != PriorityLevel::END; ++prioritylevel)
 		for (int i = 0; i < mPatientList[prioritylevel].size(); ++i) 
 			if (mPatientList[prioritylevel][i].GetPIN() == PIN)
-				flag = true;
+				fDuplicatePatient = true;
 
 	// Check Catagory Level
-	//if (flag)
+	if (!fDuplicatePatient)
+	{
+		mPatientList[level].push_back(data);
+	}
 	//	mPatientList[data.GetPriorityLevel()].push_back(data);	// Addes to the end of the Catagory Level
 }
 
@@ -66,9 +69,14 @@ PriorityQueue::AddPatient(Patient data)
 //	Removes a patient from the Queue
 //------------------------------------------------------------------------------------------------------------------------
 void 
-PriorityQueue::RemovePatient(Patient data)
+PriorityQueue::RemoveFromList(Patient data)
 {
-	
+	string IDHolder = data.GetPIN();
+	// Seek by ID No
+	LIST_ITERATOR(x, y)
+	{
+		IDHolder.compare(mPatientList[x][y].GetPIN());
+	}
 }
 
 //------------------------------------------------------------------------------------------------------------------------

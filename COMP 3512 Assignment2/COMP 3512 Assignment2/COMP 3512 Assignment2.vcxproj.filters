@@ -21,6 +21,9 @@
     <ClCompile Include="PriorityQueue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Triage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.hpp">
@@ -29,10 +32,10 @@
     <ClInclude Include="PriorityQueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PriorityLevel.h">
+    <ClInclude Include="Patient.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Patient.h">
+    <ClInclude Include="PriorityLevel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Triage.h">

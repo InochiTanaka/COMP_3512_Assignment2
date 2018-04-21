@@ -25,7 +25,7 @@
 #define NUM_MONTH_ON_YEAR = 12;
 
 
-class PriorityQueue 
+class PriorityQueue2 
 {
 	private:
 		static const int days_in_regular_year[];
