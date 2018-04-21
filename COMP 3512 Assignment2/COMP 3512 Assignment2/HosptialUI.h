@@ -24,8 +24,6 @@
 #define MAX_RESERVATION_MONTH = 3;
 #define NUM_MONTH_ON_YEAR = 12;
 
-const int HosptialUI::days_in_regular_year[] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-const int HosptialUI::days_in_leap_year[] = { 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
 // Inochi's
 
@@ -52,3 +50,4 @@ public:
 
 	void printPatient(Patient p);
 };
+

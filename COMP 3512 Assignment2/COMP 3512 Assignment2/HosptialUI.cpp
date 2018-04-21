@@ -2,6 +2,8 @@
 #include "HosptialUI.h"
 
 // Inochi's
+const int HosptialUI::days_in_regular_year[] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+const int HosptialUI::days_in_leap_year[] = { 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
 bool HosptialUI::addSequence()
 {
