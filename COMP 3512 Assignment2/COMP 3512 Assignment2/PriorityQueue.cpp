@@ -122,17 +122,29 @@ PriorityQueue::Update()
 	for (int i = PriorityLevel::CRITICAL; i < PriorityLevel::END; ++i)
 	{
 		// If not Empty then Pop the front, Do this only once
-		if (mPatientList[i].size() > 0)		
+		if (mPatientList[i].size() > 0)
 		{
-			mPatientList[i].pop_front();	
+			mPatientList[i].pop_front();
 			break;
 		}
 	}
 
 	LIST_ITERATOR(x, y)
 	{
-		mPatientList[x][y].GetAdmissionDate();
+		mPatientList[x][y].SetTimeDuration(TimeCheck(GetTime(mPatientList[x][y].GetAdmissionDate())));
 	}
+
+	FixList();
+
+}
+
+//------------------------------------------------------------------------------------------------------------------------
+//	@	void PriorityQueue::FixList() 
+//------------------------------------------------------------------------------------------------------------------------
+//	Iterates through the List and Fixes list
+//------------------------------------------------------------------------------------------------------------------------
+void PriorityQueue::FixList() 
+{
 
 }
 

@@ -63,7 +63,7 @@ private:
 	int TimeCheck(std::vector<int> time);
 	std::vector<int> GetTime(std::string string);
 	void Update();									// Standard Update After External Input / output
-	void FixList() {}								// Update After Internal Alterations
+	void FixList();									// Update After Internal Alterations
 	void Promote();
 	//PaitentListIterator Seek();
 

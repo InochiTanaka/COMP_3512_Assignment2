@@ -54,7 +54,7 @@ public:
 	std::string GetPIN()				{ return mPIN; }
 	std::string GetSymptoms()			{ return mSymptoms; }
 
-	
+	int GetTimePassed()					{ return mTimePassed; }
 	// Mutators ------------------------------------------------------------------------------------
 
 	// Name
@@ -79,6 +79,7 @@ public:
 	void SetPIN(std::string data)				{ mPIN = data; }
 	void SetSymptoms(std::string symptoms)		{ mSymptoms = symptoms; }
 	
+	void SetTimeDuration(int time)				{ mTimePassed = time; }
 	
 private:	// Memeber Variables ------------------------------------------------------------------
 
