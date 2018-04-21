@@ -115,7 +115,7 @@ Patient HosptialUI::inputPatientBirthday(Patient p)
 
 		if (!checkResult)
 		{
-			std::cout << "Please input BirthDay again \n";
+			std::cout << "\nPlease input BirthDay again \n";
 		}
 
 	} while (!checkResult);
@@ -290,13 +290,13 @@ bool HosptialUI::checkValidBirthDay(int y, int m, int d)
 		return false;
 	}
 
-	if (stM.length() <= 2)
+	if (stM.length() > 2)
 	{
 		std::cout << " input BirthDay is invalid : the month is not less than 2 digits \n";
 		return false;
 	}
 
-	if (stD.length() <= 2)
+	if (stD.length() > 2)
 	{
 		std::cout << " input BirthDay is invalid : the day is not less than 2 digits \n";
 		return false;
