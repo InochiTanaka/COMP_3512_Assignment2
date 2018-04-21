@@ -9,6 +9,7 @@ bool HosptialUI::addSequence()
 {
 	Patient patient = input();
 
+	std::cout << "\n------------ New Patient Data Summary ------------\n";
 	printPatient(patient);
 	//patientList.push_back(patient);
 	//mTestList.push_back(patient);
@@ -82,17 +83,7 @@ Patient HosptialUI::inputPatientName(Patient p)
 			numData++;
 		}
 
-		if (inputFirstName == "" || inputLastName == "")
-		{
-			std::cout << "Please input First Name and Last Name\n";
-			checkResult = false;
-		}
-		else if (numData > 3)
-		{
-			std::cout << "Please input First Name, Last Name, and Middle Name only\n";
-			checkResult = false;
-		}
-
+		checkResult = checkValidName(inputFirstName, inputLastName, inputMiddleName, numData);
 
 	} while (!checkResult);
 
@@ -129,8 +120,6 @@ Patient HosptialUI::inputPatientBirthday(Patient p)
 
 	} while (!checkResult);
 
-	std::cin.clear();
-
 	p.SetBirthYear(inputYear);
 	p.SetBirthMonth(inputMonth);
 	p.SetBirthDay(inputDay);
@@ -146,16 +135,14 @@ Patient HosptialUI::inputPatientPIN(Patient p)
 	{
 		std::cout << "Input Patient's Personal Healthcare Number(PIN): ";
 		std::cin >> inputPIN;
+		std::cin.clear();
+		std::cin.ignore();
 
 		//inputFirstName >> inputLastName >> inputMiddleName;
 
 		std::stringstream ss(inputPIN);
 
-		if (inputPIN.length() != 8)
-		{
-			std::cout << "input PIN is invalid : the length of PIN should be 8 numbers\n";
-		}
-	} while (inputPIN.length() != 8);
+	} while (!checkValidPIN(inputPIN));
 
 	p.SetPIN(inputPIN);
 	return p;
@@ -165,10 +152,13 @@ Patient HosptialUI::inputPatientSymptoms(Patient p)
 {
 	std::string inputSymptoms;
 
-	std::cout << "Input Patient's Symptoms: ";
+	do 
+	{
+		std::cout << "Input Patient's Symptoms: ";
+		getline(std::cin, inputSymptoms);
+		std::cin.clear();
 
-	std::cin >> inputSymptoms;
-	std::cin.clear();
+	} while (!checkValidSymptoms(inputSymptoms));
 
 	p.SetSymptoms(inputSymptoms);
 	return p;
@@ -190,12 +180,9 @@ Patient HosptialUI::inputPatientCategory(Patient p)
 		std::cout << "Input Patient's Number of Seriousness's Category: ";
 
 		std::cin >> categorySeriousness;
+		std::cin.clear();
 
-		if (0 >= categorySeriousness || categorySeriousness > 6)
-		{
-			std::cout << "Please input Number of Seriousness's Category between 1 - 6 \n";
-		}
-	} while (0 >= categorySeriousness || categorySeriousness > 6);
+	} while (!checkValidCategory(categorySeriousness));
 
 	p.SetCategory((PriorityLevel)(categorySeriousness - 1));
 
@@ -232,6 +219,7 @@ Patient HosptialUI::inputRegisterTime(Patient p)
 	} while (!checkResult);
 
 	std::cin.clear();
+	std::cin.ignore();
 
 	if (inputHour < 10)
 	{
@@ -256,6 +244,22 @@ Patient HosptialUI::inputRegisterTime(Patient p)
 	p.SetAdmissionDate(timeString);
 
 	return p;
+}
+
+bool HosptialUI::checkValidName(std::string fName, std::string lName, std::string mName, int numData)
+{
+	if (fName == "" || lName == "")
+	{
+		std::cout << "Please input First Name and Last Name\n";
+		return false;
+	}
+	else if (numData > 3)
+	{
+		std::cout << "Please input First Name, Last Name, and Middle Name only\n";
+		return false;
+	}
+
+	return true;
 }
 
 bool HosptialUI::checkValidBirthDay(int y, int m, int d)
@@ -297,6 +301,27 @@ bool HosptialUI::checkValidBirthDay(int y, int m, int d)
 	return true;
 }
 
+bool HosptialUI::checkValidPIN(std::string pin)
+{
+	if (pin.length() != 8)
+	{
+		std::cout << "input PIN is invalid : the length of PIN should be 8 numbers\n";
+		return false;
+	}
+
+	return true;
+}
+
+bool HosptialUI::checkValidSymptoms(std::string symp)
+{
+	if (symp.length() == 0)
+	{
+		std::cout << "input Symptoms is invalid : Please input any Symptoms\n";
+		return false;
+	}
+	return true;
+}
+
 bool HosptialUI::checkValidTime(int h, int min)
 {
 	//Get current time 
@@ -326,6 +351,16 @@ bool HosptialUI::checkValidTime(int h, int min)
 	}
 
 	//retrun true as the input reservation date/time is not invalid on all test
+	return true;
+}
+
+bool HosptialUI::checkValidCategory(int cateNum)
+{
+	if (0 > cateNum - 1 || cateNum - 1 > 5)
+	{
+		std::cout << "Please input Number of Seriousness's Category between 1 - 6 \n";
+		return false;
+	}
 	return true;
 }
 

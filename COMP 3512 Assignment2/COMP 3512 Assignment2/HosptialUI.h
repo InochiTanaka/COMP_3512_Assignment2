@@ -45,8 +45,12 @@ public:
 	Patient inputPatientPIN(Patient p);
 	Patient inputPatientSymptoms(Patient p);
 	Patient inputPatientCategory(Patient p);
+	bool checkValidName(std::string fName, std::string lName, std::string mName, int numData);
 	bool checkValidBirthDay(int y, int m, int d);
+	bool checkValidPIN(std::string pin);
+	bool checkValidSymptoms(std::string symp);
 	bool checkValidTime(int h, int min);
+	bool checkValidCategory(int cateNum);
 
 	void printPatient(Patient p);
 };
