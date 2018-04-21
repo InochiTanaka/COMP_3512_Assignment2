@@ -8,6 +8,8 @@ const int HosptialUI::days_in_leap_year[] = { 0, 31, 29, 31, 30, 31, 30, 31, 31,
 bool HosptialUI::addSequence()
 {
 	Patient patient = input();
+
+	printPatient(patient);
 	//patientList.push_back(patient);
 	//mTestList.push_back(patient);
 
@@ -55,6 +57,7 @@ Patient HosptialUI::inputPatientName(Patient p)
 
 		std::cout << "Input Patient's Full Name \n(eg. \"FirstName LastName MiddleName\" or \"FirstName LastName,\" ): ";
 		getline(std::cin, inputFullName);
+		std::cin.clear();
 
 		//inputFirstName >> inputLastName >> inputMiddleName;
 
@@ -163,7 +166,9 @@ Patient HosptialUI::inputPatientSymptoms(Patient p)
 	std::string inputSymptoms;
 
 	std::cout << "Input Patient's Symptoms: ";
+
 	std::cin >> inputSymptoms;
+	std::cin.clear();
 
 	p.SetSymptoms(inputSymptoms);
 	return p;
@@ -334,17 +339,18 @@ time_t HosptialUI::getAdmissionTime(int y, int mon, int d, int h, int min)
 
 void HosptialUI::printPatient(Patient p)
 {
-	//std::cout << "Patient First Name : " << GetFirstName << "\n";
-	//std::cout << "Patient Last Name : " << p.GetLastName << "\n";
-	//std::cout << "Patient Middle Name : " << p.GetMiddleName << "\n";
+	std::cout << "Patient First Name : " << p.GetFirstName() << "\n";
+	std::cout << "Patient Last Name : " << p.GetLastName() << "\n";
+	std::cout << "Patient Middle Name : " << p.GetMiddleName() << "\n";
 
-	//std::cout << "Patient Birthday : " 
-	//	<< p.GetBirthMonth 
-	//	<< " / " << p.GetBirthDay 
-	//	<< ", " << p.GetBirthYear << "\n";
+	std::cout << "Patient Birthday : "
+		<< p.GetBirthYear()
+		<< " - " << p.GetBirthMonth()
+		<< " - " << p.GetBirthDay()
+		<< "\n";
 
-	//std::cout << "Personal Healthcare Number : " << p.GetPIN << "\n";
-	//std::cout << "Symptoms : " << p.GetSymptoms << "\n";
-	//std::cout << "Registered time : " << p.GetMiddleName << "\n";
-	//std::cout << "Category of seriousness : " << p.GetCategory << "\n";
+	std::cout << "Personal Healthcare Number : " << p.GetPIN() << "\n";
+	std::cout << "Symptoms : " << p.GetSymptoms() << "\n";
+	std::cout << "Registered time : " << p.GetAdmissionDate() << "\n";
+	std::cout << "Category of seriousness : " << p.GetCategory() + 1 << "\n";
 }

@@ -32,7 +32,17 @@ public:
 
 public:		
 
-	//	Accessors -----------------------------------------------------------------------------------
+	std::string GetFirstName()		{ return mName.FirstName; }
+	std::string GetMiddleName()		{ return mName.SecondName; }
+	std::string GetLastName()		{ return mName.LastName; }
+	std::string	GetFullName()		{ return mName.FirstName + ' ' + mName.SecondName + ' '+ mName.LastName; }
+	std::string GetSymptoms()		{ return mSymptoms; }
+	std::string GetCategory()		{ return mSymptoms; }
+	int GetBirthYear()				{ return mBday.Year; }
+	int GetBirthMonth()				{ return mBday.Month; }
+	int GetBirthDay()				{ return mBday.Day; }
+	std::string  GetPIN()					{ return mPIN; }
+	std::string GetAdmissionDate()			{ return mAdmissionTime; }
 
 	// Name
 	std::string GetFirstName()			{ return mName.FirstName; }
