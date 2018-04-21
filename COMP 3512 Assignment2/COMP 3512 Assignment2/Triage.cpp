@@ -22,6 +22,7 @@ void Triage::Insert(Patient data)
 {
 	PriorityLevel eStatus = DefineCondition(data);
 	mHospitalList.AddToList(data, eStatus);
+	// Print !!
 }
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -73,6 +74,3 @@ PriorityLevel Triage::DefineCondition(Patient data)
 	return PriorityLevel::COMFORTABLE;
 
 }
-
-
-

@@ -18,6 +18,8 @@
 #include <iostream>
 #include <string.h>
 
+#include "PriorityLevel.h"
+
 //----------------------------------------------------------------------------------------------------
 //-- Class Declerations ------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
@@ -28,41 +30,69 @@ public:
 	Patient() {}
 	~Patient() {}
 
-public:		//	Accessors ----------------------------------------------------------------------
+public:		
 
-	std::string GetFirstName()		{ return mName.FirstName; }
-	std::string GetMiddleName()		{ return mName.SecondName; }
-	std::string GetLastName()		{ return mName.LastName; }
-	std::string	GetFullName()		{ return mName.FirstName + ' ' + mName.SecondName + ' '+ mName.LastName; }
-	std::string GetSymptoms()		{ return mSymptoms; }
-	std::string GetCategory()		{ return mSymptoms; }
-	int GetBirthYear()				{ return mBday.Year; }
-	int GetBirthMonth()				{ return mBday.Month; }
-	int GetBirthDay()				{ return mBday.Day; }
-	std::string  GetPIN()					{ return mPIN; }
-	std::string GetAdmissionDate()			{ return mAdmissionTime; }
+	//	Accessors -----------------------------------------------------------------------------------
 
-public:		// Mutators ----------------------------------------------------------------------
+	// Name
+	std::string GetFirstName()			{ return mName.FirstName; }
+	std::string GetMiddleName()			{ return mName.SecondName; }
+	std::string GetLastName()			{ return mName.LastName; }
+	std::string	GetFullName()			{ return mName.FirstName + ' ' + mName.SecondName + ' '+ mName.LastName; }
 
+	
+	// Time
+	int GetBirthYear()					{ return mBday.Year; }
+	int GetBirthMonth()					{ return mBday.Month; }
+	int GetBirthDay()					{ return mBday.Day; }
+	std::string GetAdmissionDate()		{ return mAdmissionTime; }
+
+
+	// Data
+	PriorityLevel GetCategory()			{ return mCategory; }
+
+	std::string GetPIN()				{ return mPIN; }
+	std::string GetSymptoms()			{ return mSymptoms; }
+
+	
+	// Mutators ------------------------------------------------------------------------------------
+
+	// Name
 	void SetName(std::string first, std::string middle, std::string last) 
 	{
 		mName.FirstName = first;
 		mName.SecondName = middle;
 		mName.LastName = last;
 	}
-	void SetPIN(std::string data)					{ mPIN = data; }
 
-	void SetBirthYear(int year)				{ mBday.Year = year; }
-	void SetBirthMonth(int month)			{ mBday.Month = month; }
-	void SetBirthDay(int day)				{ mBday.Day = day; }
 
-	void SetAdmissionDate(std::string data)			{ mAdmissionTime = data; }
-	void SetSymptoms(std::string symptoms)	{ mSymptoms = symptoms; }
-	void SetCategory(int category)			{ mCategory = category; }
+	// Time
+	void SetBirthYear(int year)					{ mBday.Year = year; }
+	void SetBirthMonth(int month)				{ mBday.Month = month; }
+	void SetBirthDay(int day)					{ mBday.Day = day; }
+	void SetAdmissionDate(std::string data)		{ mAdmissionTime = data; }
 
+
+	// Data
+	void SetCategory(PriorityLevel category)	{ mCategory = category; }
+
+	void SetPIN(std::string data)				{ mPIN = data; }
+	void SetSymptoms(std::string symptoms)		{ mSymptoms = symptoms; }
 	
-private:	// Memeber Variables ----------------------------------------------------------------------
+	
+private:	// Memeber Variables ------------------------------------------------------------------
 
+	// Time
+	std::string mAdmissionTime; // 24h format, 4 digit
+	int mTimePassed;			// Time passed since Admission
+
+	// Enum
+	PriorityLevel mCategory;
+
+	// String Data
+	std::string mPIN;			// First Digits can be Zero as Inochi Pointed out, we wish to store that as well
+	std::string mSymptoms;
+	
 	struct Name { 
 		std::string FirstName; 
 		std::string SecondName; 
@@ -75,13 +105,6 @@ private:	// Memeber Variables --------------------------------------------------
 		int Month;
 		int Day;
 	} mBday;
-
-	std::string mSymptoms;
-	int mCategory;
-
-	std::string mAdmissionTime; // 24h format, 4 digit
-
-	std::string mPIN;
 
 };
 

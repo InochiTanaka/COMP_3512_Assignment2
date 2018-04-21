@@ -192,7 +192,7 @@ Patient HosptialUI::inputPatientCategory(Patient p)
 		}
 	} while (0 >= categorySeriousness || categorySeriousness > 6);
 
-	p.SetCategory(categorySeriousness - 1);
+	p.SetCategory((PriorityLevel)(categorySeriousness - 1));
 
 	return p;
 }
