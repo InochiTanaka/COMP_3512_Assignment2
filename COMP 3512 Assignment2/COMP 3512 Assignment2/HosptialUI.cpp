@@ -273,22 +273,32 @@ bool HosptialUI::checkValidBirthDay(int y, int m, int d)
 	int currentMonth = now.tm_mon + 1;
 	int currentDay = now.tm_mday;
 
-	//Check input time is valid like between 00:00 and 23:59
-	if (y > currentYear)
+	//Check input BirthDay is valid
+
+	std::stringstream ssY, ssM, ssD;
+	ssY << y;
+	ssM << m;
+	ssD << d;
+
+	std::string stY = ssY.str();
+	std::string stM = ssM.str();
+	std::string stD = ssD.str();
+
+	if (stY.length() != 4)
 	{
-		std::cout << " input BirthDay is invalid : the year is in the future \n";
+		std::cout << " input BirthDay is invalid : the year is not 4 digits \n";
 		return false;
 	}
 
-	if (y >= currentYear && m > currentMonth)
+	if (stM.length() <= 2)
 	{
-		std::cout << " input BirthDay is invalid : the month is in the future \n";
+		std::cout << " input BirthDay is invalid : the month is not less than 2 digits \n";
 		return false;
 	}
 
-	if (y >= currentYear && m >= currentMonth && d > currentDay)
+	if (stD.length() <= 2)
 	{
-		std::cout << " input BirthDay is invalid : the day is in the future \n";
+		std::cout << " input BirthDay is invalid : the day is not less than 2 digits \n";
 		return false;
 	}
 
