@@ -182,7 +182,7 @@ Patient HosptialUI::inputPatientCategory(Patient p)
 		std::cin >> categorySeriousness;
 		std::cin.clear();
 
-	} while (checkValidCategory(categorySeriousness));
+	} while (!checkValidCategory(categorySeriousness));
 
 	p.SetCategory(categorySeriousness - 1);
 
@@ -356,7 +356,7 @@ bool HosptialUI::checkValidTime(int h, int min)
 
 bool HosptialUI::checkValidCategory(int cateNum)
 {
-	if (1 >= cateNum+1 || cateNum+1 >= 6)
+	if (0 > cateNum - 1 || cateNum - 1 > 5)
 	{
 		std::cout << "Please input Number of Seriousness's Category between 1 - 6 \n";
 		return false;
