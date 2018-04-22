@@ -49,6 +49,7 @@ void UI_Main::Action()
 		}
 		else if (input == 'd' || input == '4')
 		{
+			UIAgent = new UI_Save(*mTriageHandler);
 		}
 		else if (input == 'e' || input == '5')
 		{

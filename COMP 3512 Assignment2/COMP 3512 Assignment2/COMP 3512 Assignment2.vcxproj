@@ -124,6 +124,7 @@
     <ClCompile Include="UI_GetPatient.cpp" />
     <ClCompile Include="UI_Main.cpp" />
     <ClCompile Include="UI_Print.cpp" />
+    <ClCompile Include="UI_Save.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UI_AddPatient.h" />
@@ -136,6 +137,7 @@
     <ClInclude Include="UI_GetPatient.h" />
     <ClInclude Include="UI_Main.h" />
     <ClInclude Include="UI_Print.h" />
+    <ClInclude Include="UI_Save.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
