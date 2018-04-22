@@ -27,7 +27,9 @@
 class Patient 
 {
 public:
-	Patient() {}
+	Patient() 
+		: mTimePassed(0)
+	{}
 	~Patient() {}
 
 public:		
@@ -82,32 +84,37 @@ public:
 	void SetSymptoms(std::string symptoms)		{ mSymptoms = symptoms; }
 	
 	void SetTimeDuration(int time)				{ mTimePassed = time; }
-	
+
+#pragma region Variables 
+
+	// Shrinks code, People shouldn't see what kind of data it has only how to use it.
+	// That and it saves my eyes for the horror
+
 private:	// Memeber Variables ------------------------------------------------------------------
 
 	// Time
 	std::string mAdmissionTime; // 24h format, 4 digit
 	int mTimePassed;			// Time passed since Admission
 
-	// Enum
-	PriorityLevel mCategory;
-
+	PriorityLevel mCategory;	// Enum
+	
 	// String Data
 	std::string mPIN;			// First Digits can be Zero as Inochi Pointed out, we wish to store that as well
 	std::string mSymptoms;
-	
-	struct Name { 
-		std::string FirstName; 
-		std::string SecondName; 
+
+	struct Name {
+		std::string FirstName;
+		std::string SecondName;
 		std::string LastName;
 	} mName;
 
-	struct Birthdate 
+	struct Birthdate
 	{
 		int Year;
 		int Month;
 		int Day;
 	} mBday;
+#pragma endregion
 
 };
 

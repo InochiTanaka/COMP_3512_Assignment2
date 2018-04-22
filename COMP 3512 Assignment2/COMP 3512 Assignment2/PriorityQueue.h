@@ -74,8 +74,8 @@ private:
 private:
 	std::vector<int> mCurrentTime;
 public: // Temporary
-	std::deque<Patient> mPatientList[]; // 2D Deque
-	
+	std::deque<Patient>* mPatientList; // 2D Deque
+	int numOfPatient;
 
 };
 

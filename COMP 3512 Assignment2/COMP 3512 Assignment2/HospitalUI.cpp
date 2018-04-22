@@ -1,11 +1,11 @@
 
-#include "HosptialUI.h"
+#include "HospitalUI.h"
 
 // Inochi's
-const int HosptialUI::days_in_regular_year[] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-const int HosptialUI::days_in_leap_year[] = { 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+const int HospitalUI::days_in_regular_year[] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+const int HospitalUI::days_in_leap_year[] = { 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
-bool HosptialUI::addSequence()
+bool HospitalUI::addSequence()
 {
 	Patient patient = input();
 
@@ -17,7 +17,7 @@ bool HosptialUI::addSequence()
 	return false;
 }
 
-Patient HosptialUI::input()
+Patient HospitalUI::input()
 {
 	Patient p;
 
@@ -42,7 +42,7 @@ Patient HosptialUI::input()
 	return p;
 }
 
-Patient HosptialUI::inputPatientName(Patient p)
+Patient HospitalUI::inputPatientName(Patient p)
 {
 	std::string inputFullName;
 
@@ -92,7 +92,7 @@ Patient HosptialUI::inputPatientName(Patient p)
 	return p;
 }
 
-Patient HosptialUI::inputPatientBirthday(Patient p)
+Patient HospitalUI::inputPatientBirthday(Patient p)
 {
 	int inputYear;
 	int inputMonth;
@@ -127,7 +127,7 @@ Patient HosptialUI::inputPatientBirthday(Patient p)
 	return p;
 }
 
-Patient HosptialUI::inputPatientPIN(Patient p)
+Patient HospitalUI::inputPatientPIN(Patient p)
 {
 	std::string inputPIN;
 
@@ -148,7 +148,7 @@ Patient HosptialUI::inputPatientPIN(Patient p)
 	return p;
 }
 
-Patient HosptialUI::inputPatientSymptoms(Patient p)
+Patient HospitalUI::inputPatientSymptoms(Patient p)
 {
 	std::string inputSymptoms;
 
@@ -164,7 +164,7 @@ Patient HosptialUI::inputPatientSymptoms(Patient p)
 	return p;
 }
 
-Patient HosptialUI::inputPatientCategory(Patient p)
+Patient HospitalUI::inputPatientCategory(Patient p)
 {
 	int categorySeriousness;
 
@@ -189,7 +189,7 @@ Patient HosptialUI::inputPatientCategory(Patient p)
 	return p;
 }
 
-Patient HosptialUI::inputRegisterTime(Patient p)
+Patient HospitalUI::inputRegisterTime(Patient p)
 {
 	int inputHour;
 	int inputMin;
@@ -246,7 +246,7 @@ Patient HosptialUI::inputRegisterTime(Patient p)
 	return p;
 }
 
-bool HosptialUI::checkValidName(std::string fName, std::string lName, std::string mName, int numData)
+bool HospitalUI::checkValidName(std::string fName, std::string lName, std::string mName, int numData)
 {
 	if (fName == "" || lName == "")
 	{
@@ -262,7 +262,7 @@ bool HosptialUI::checkValidName(std::string fName, std::string lName, std::strin
 	return true;
 }
 
-bool HosptialUI::checkValidBirthDay(int y, int m, int d)
+bool HospitalUI::checkValidBirthDay(int y, int m, int d)
 {
 	//Get current time 
 	struct tm now;
@@ -311,7 +311,7 @@ bool HosptialUI::checkValidBirthDay(int y, int m, int d)
 	return true;
 }
 
-bool HosptialUI::checkValidPIN(std::string pin)
+bool HospitalUI::checkValidPIN(std::string pin)
 {
 	if (pin.length() != 8)
 	{
@@ -322,7 +322,7 @@ bool HosptialUI::checkValidPIN(std::string pin)
 	return true;
 }
 
-bool HosptialUI::checkValidSymptoms(std::string symp)
+bool HospitalUI::checkValidSymptoms(std::string symp)
 {
 	if (symp.length() == 0)
 	{
@@ -332,7 +332,7 @@ bool HosptialUI::checkValidSymptoms(std::string symp)
 	return true;
 }
 
-bool HosptialUI::checkValidTime(int h, int min)
+bool HospitalUI::checkValidTime(int h, int min)
 {
 	//Get current time 
 	struct tm now;
@@ -364,7 +364,7 @@ bool HosptialUI::checkValidTime(int h, int min)
 	return true;
 }
 
-bool HosptialUI::checkValidCategory(int cateNum)
+bool HospitalUI::checkValidCategory(int cateNum)
 {
 	if (0 > cateNum - 1 || cateNum - 1 > 5)
 	{
@@ -374,7 +374,7 @@ bool HosptialUI::checkValidCategory(int cateNum)
 	return true;
 }
 
-time_t HosptialUI::getAdmissionTime(int y, int mon, int d, int h, int min)
+time_t HospitalUI::getAdmissionTime(int y, int mon, int d, int h, int min)
 {
 	struct tm timeStruct = { 0, min, h, d, mon - 1, y - 1900 };
 	time_t time = std::mktime(&timeStruct);
@@ -382,7 +382,7 @@ time_t HosptialUI::getAdmissionTime(int y, int mon, int d, int h, int min)
 	return time;
 }
 
-void HosptialUI::printPatient(Patient p)
+void HospitalUI::printPatient(Patient p)
 {
 	std::cout << "Patient First Name : " << p.GetFirstName() << "\n";
 	std::cout << "Patient Last Name : " << p.GetLastName() << "\n";

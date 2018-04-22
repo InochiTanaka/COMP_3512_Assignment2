@@ -2,8 +2,7 @@
 #ifndef __ASN2_PROJECTINCLUDES_H__
 #define __ASN2_PROJECTINCLUDES_H__
 
-
-
+// Libraries
 #include <stdlib.h>
 #include <cstring>
 
@@ -15,11 +14,6 @@
 // Time 
 #include <ctime>
 #include <time.h>
-
-
-
-
-
 
 
 #endif // !__ASN2_PROJECTINCLUDES_H__

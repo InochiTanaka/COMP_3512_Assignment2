@@ -26,7 +26,9 @@ using namespace std; // safe to call in this cpp
 //	Default Constructor 
 //------------------------------------------------------------------------------------------------------------------------
 PriorityQueue::PriorityQueue()
+	: numOfPatient(0)
 {
+	mPatientList = new std::deque<Patient>[PriorityLevel::END - 1];	// Magic, BECAUSE I CAN
 	// Empty
 }
 
@@ -52,12 +54,13 @@ PriorityQueue::AddToList(Patient data, PriorityLevel level)
 	bool fDuplicatePatient = false;
 
 	// Iterate through to see if patient is already added
-	for (int prioritylevel = PriorityLevel::CRITICAL; prioritylevel != PriorityLevel::END; ++prioritylevel)
-		for (int i = 0; i < mPatientList[prioritylevel].size(); ++i)
-			if (mPatientList[prioritylevel][i].GetPIN().compare(PIN)  // Triple Confirmation it if it's the same patient
-				&& (mPatientList[prioritylevel][i].GetFullName().compare(data.GetFullName()) && mPatientList[prioritylevel][i].GetAdmissionTime() == data.GetAdmissionTime()))
-				fDuplicatePatient = true;
-
+	for (int prioritylevel = PriorityLevel::CRITICAL; prioritylevel != PriorityLevel::END; ++prioritylevel)	// Iterating by Enum values
+		for (int i = 0; i < mPatientList[prioritylevel].size(); ++i)										// Inner List Iteration
+		{
+			if (mPatientList[prioritylevel][i].GetPIN().compare(PIN))  // Triple Confirmation it if it's the same patient
+				if (mPatientList[prioritylevel][i].GetFullName().compare(data.GetFullName()) && mPatientList[prioritylevel][i].GetAdmissionTime() == data.GetAdmissionTime())
+					fDuplicatePatient = true;
+		}
 
 	// Push to the Category Level
 	if (!fDuplicatePatient)
@@ -70,11 +73,14 @@ PriorityQueue::AddToList(Patient data, PriorityLevel level)
 		RemoveFromList(data);
 		mPatientList[level].push_back(data);
 	}
+	++numOfPatient;
 
 	// ASN2 #9 Requirement
 	//	Removing After Adding
 
-	UpdateList();
+	// No point popping the first that was entered
+	//if(numOfPatient > 1)
+		//UpdateList();
 
 	//	mPatientList[data.GetPriorityLevel()].push_back(data);	// Addes to the end of the Catagory Level
 }
@@ -121,6 +127,7 @@ PriorityQueue::UpdateList()
 		if (mPatientList[i].size() > 0)
 		{
 			mPatientList[i].pop_front();
+			--numOfPatient;
 			break;
 		}
 	}

@@ -20,12 +20,12 @@
 //------------------------------------------------------------------------------------------------------------------------
 void Triage::Insert(Patient data) 
 {
-	PriorityLevel eStatus = DefineCondition(data);
-	mHospitalList.AddToList(data, eStatus);
+	//PriorityLevel eStatus = DefineCondition(data);
+	mHospitalList.AddToList(data, (PriorityLevel)data.GetCategory());
 
-	mHospitalList.UpdateTime(data.GetAdmissionTime());		// Updates List's Time
+	//mHospitalList.UpdateTime(data.GetAdmissionTime());		// Updates List's Time
 
-	mHospitalList.UpdateList();					// Update List 
+	//mHospitalList.UpdateList();					// Update List 
 	// Print !!
 }
 
