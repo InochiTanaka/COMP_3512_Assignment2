@@ -123,11 +123,13 @@
     <ClCompile Include="UI_AddPatient.cpp" />
     <ClCompile Include="UI_ChangeCategory.cpp" />
     <ClCompile Include="UI_GetPatient.cpp" />
+    <ClCompile Include="UI_Load.cpp" />
     <ClCompile Include="UI_Main.cpp" />
     <ClCompile Include="UI_Print.cpp" />
     <ClCompile Include="UI_Save.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="UI_Load.h" />
     <ClInclude Include="UI_AddPatient.h" />
     <ClInclude Include="Patient.h" />
     <ClInclude Include="PriorityLevel.h" />

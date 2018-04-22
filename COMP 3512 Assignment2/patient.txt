@@ -1,0 +1,2 @@
+Inochi	Tanaka	test2	1985-6-26	11111111	test2	02:02	4
+Inochi	Tanaka	-	1985-6-26	01234567	test	01:01	5

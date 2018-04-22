@@ -53,6 +53,7 @@ void UI_Main::Action()
 		}
 		else if (input == 'e' || input == '5')
 		{
+			UIAgent = new UI_Load(*mTriageHandler);
 		}
 		else // else if (input == 'f' || input == '6')
 		{

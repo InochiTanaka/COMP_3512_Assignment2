@@ -18,8 +18,5 @@
     <ClCompile Include="UnitTestHosptialUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\COMP 3512 Assignment2\HospitalUI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
