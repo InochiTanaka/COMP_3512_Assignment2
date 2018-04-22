@@ -162,7 +162,7 @@ void
 PriorityQueue::FixList()
 {
 	for(int level = PriorityLevel::CRITICAL; level != PriorityLevel::MAX; ++level)
-		if (mPatientList[level].size() > 0)
+		if (mPatientList[level].size() > 0)	
 		{
 			for (PaitentIterator listItr = mPatientList[level].begin(); listItr != mPatientList[level].end(); ++listItr)
 			{
@@ -174,6 +174,43 @@ PriorityQueue::FixList()
 						listItr = mPatientList[level].begin();
 					else
 						break;
+				}
+			}
+		}
+}
+
+//------------------------------------------------------------------------------------------------------------------------
+//	@	int PriorityQueue::TimeCheck(vector<int> time)
+//------------------------------------------------------------------------------------------------------------------------
+// Promote Based on Time
+//------------------------------------------------------------------------------------------------------------------------
+void PriorityQueue::UpdateList()
+{
+	for (int level = PriorityLevel::CRITICAL_STABLE; level != PriorityLevel::MAX; ++level)
+		for (int i = 0; i < mPatientList[level].size(); ++i)
+		{
+			if (level == PriorityLevel::CRITICAL_STABLE)
+			{
+				if (mPatientList[level][i].GetTimePassed() >= 1)
+				{
+					mPatientList[level][i].SetCategory(mPatientList[level][i].GetCategory() - 1);
+					mPatientList[level][i].SetTimeDuration(0);			// reset counter
+				}
+			}
+			else if (level <= PriorityLevel::SERIOUS)
+			{
+				if (mPatientList[level][i].GetTimePassed() >= 2)
+				{
+					mPatientList[level][i].SetCategory(mPatientList[level][i].GetCategory() - 1);
+					mPatientList[level][i].SetTimeDuration(0);			// reset counter
+				}
+			}
+			else  if (level <= PriorityLevel::COMFORTABLE)
+			{
+				if (mPatientList[level][i].GetTimePassed() >= 3)
+				{
+					mPatientList[level][i].SetCategory(mPatientList[level][i].GetCategory() - 1);
+					mPatientList[level][i].SetTimeDuration(0);			// reset counter
 				}
 			}
 		}
@@ -199,6 +236,8 @@ PriorityQueue::TimeCheck(vector<int> time)
 	}
 	else if (diff < 0)
 		return (mCurrentTime[0] - (time[0] - 24 ));		//  24 hour clock reverts to 0 on the 24th hour. 
+
+	return 0;
 }
 
 bool PriorityQueue::Seek(std::string PIN)

@@ -59,11 +59,13 @@ Patient& Triage::GetPatientByPIN(std::string str)
 }
 void Triage::UpdateList()	// Fixes List
 {
+	// Promote Based on Time
+	mHospitalList.UpdateList();
+
 	// Checks if all Patients Category are in the right Category
 	mHospitalList.FixList();
 
-	// Promote Based on Time
-	//mHospitalList.UpdateList();
+	
 
 }
 

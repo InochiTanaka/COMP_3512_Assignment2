@@ -14,7 +14,8 @@ void UI_ChangeCategory::Action()
 	if (UIBase::mPrimaryTriage.SearchPatient(mInputPIN))
 	{
 		InputPatientCategory(UIBase::mPrimaryTriage.GetPatientByPIN(mInputPIN));
-		UIBase::mPrimaryTriage.UpdateList();
+
+		mPrimaryTriage.UpdateList();
 	}
 	else
 	{

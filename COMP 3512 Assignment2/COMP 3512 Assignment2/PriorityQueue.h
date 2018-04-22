@@ -59,7 +59,7 @@ public:
 
 	//	Functions ----------------------------------------------------------------------
 	void FixList();
-
+	void UpdateList();
 
 
 private:
