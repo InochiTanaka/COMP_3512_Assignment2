@@ -19,6 +19,10 @@
 #include <ctime>
 #include <time.h>
 
+// file stream
+#include<iostream>
+#include<fstream>
+
 // Project defines
 #include "PriorityLevel.h"
 #include "Patient.h"
@@ -33,6 +37,7 @@
 #include "UI_GetPatient.h"
 #include "UI_ChangeCategory.h"
 #include "UI_Print.h"
+#include "UI_Save.h"
 
 void printPatient(Patient p);
 bool CheckValidCategory(int cateNum);
