@@ -28,7 +28,7 @@ using namespace std; // safe to call in this cpp
 PriorityQueue::PriorityQueue()
 	: numOfPatient(0)
 {
-	mPatientList = new std::deque<Patient>[PriorityLevel::END - 1];	// Magic, BECAUSE I CAN
+	mPatientList = new std::deque<Patient>[PriorityLevel::END - 1];	// Magic, èoóàÇÈÇæÇ©ÇÁ <-- Look chris, Moon runes
 	// Empty
 }
 

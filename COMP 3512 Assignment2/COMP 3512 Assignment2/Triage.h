@@ -38,7 +38,10 @@ public:
 	void Insert(Patient data);
 	void Remove(Patient data);
 	void Edit(Patient data);
-
+	std::deque<Patient>& GetPriorityPatientList(PriorityLevel lvl)
+	{
+		return mHospitalList.GetList((int)lvl);
+	}
 private:
 	PriorityLevel DefineCondition(Patient data);
 

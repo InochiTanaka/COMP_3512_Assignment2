@@ -9,6 +9,12 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="Header Files\UI Actions">
+      <UniqueIdentifier>{c3a41b8e-d50b-45c2-b6a7-beeaa7e0928c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI Actions">
+      <UniqueIdentifier>{9fea8249-2f07-4238-8426-efb39237dd2d}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -27,8 +33,14 @@
     <ClCompile Include="TriageTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HospitalUI.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="UI_AddPatient.cpp">
+      <Filter>Source Files\UI Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Main.cpp">
+      <Filter>Source Files\UI Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Print.cpp">
+      <Filter>Source Files\UI Actions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -47,8 +59,17 @@
     <ClInclude Include="ProjectIncludes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HospitalUI.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="UI_AddPatient.h">
+      <Filter>Header Files\UI Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="UIBase.h">
+      <Filter>Header Files\UI Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Main.h">
+      <Filter>Header Files\UI Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Print.h">
+      <Filter>Header Files\UI Actions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

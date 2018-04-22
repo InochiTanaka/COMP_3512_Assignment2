@@ -116,19 +116,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="HospitalUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PriorityQueue.cpp" />
     <ClCompile Include="Triage.cpp" />
     <ClCompile Include="TriageTest.cpp" />
+    <ClCompile Include="UI_AddPatient.cpp" />
+    <ClCompile Include="UI_Main.cpp" />
+    <ClCompile Include="UI_Print.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="UI_AddPatient.h" />
     <ClInclude Include="Patient.h" />
     <ClInclude Include="PriorityLevel.h" />
     <ClInclude Include="PriorityQueue.h" />
     <ClInclude Include="ProjectIncludes.h" />
     <ClInclude Include="Triage.h" />
-    <ClInclude Include="HospitalUI.h" />
+    <ClInclude Include="UIBase.h" />
+    <ClInclude Include="UI_Main.h" />
+    <ClInclude Include="UI_Print.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

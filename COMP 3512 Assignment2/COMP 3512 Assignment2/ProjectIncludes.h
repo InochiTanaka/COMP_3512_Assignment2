@@ -6,6 +6,10 @@
 #include <stdlib.h>
 #include <cstring>
 
+// STL
+#include <vector>
+#include <deque>
+
 // IO
 #include <stdio.h>
 #include <iomanip>
@@ -14,6 +18,16 @@
 // Time 
 #include <ctime>
 #include <time.h>
+
+// Project defines
+#include "PriorityLevel.h"
+#include "Patient.h"
+#include "PriorityQueue.h"
+#include "Triage.h"
+
+#include "UIBase.h"
+#include "UI_AddPatient.h"
+#include "UI_Print.h"
 
 
 #endif // !__ASN2_PROJECTINCLUDES_H__

@@ -78,3 +78,4 @@ PriorityLevel Triage::DefineCondition(Patient data)
 	return PriorityLevel::COMFORTABLE;
 
 }
+

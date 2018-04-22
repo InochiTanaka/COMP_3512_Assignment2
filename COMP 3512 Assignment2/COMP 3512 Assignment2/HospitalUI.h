@@ -48,6 +48,8 @@ namespace UIState
 //-- Class Declerations ------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------
 
+// TODO:
+// This should be polymorphic inherting a base UI class with a Print()
 
 class HospitalUI
 {
@@ -56,9 +58,9 @@ private:
 	static const int days_in_leap_year[];
 	//std::vector<Patient> patientList;
 	//std::deque<Patient> mTestList;
-	
 
 public:
+	
 	bool addSequence();
 	Patient input();
 	Patient inputRegisterTime(Patient p);
