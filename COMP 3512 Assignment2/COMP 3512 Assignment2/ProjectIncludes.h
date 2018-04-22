@@ -25,14 +25,18 @@
 #include "PriorityQueue.h"
 #include "Triage.h"
 
+// UI Base Class
 #include "UIBase.h"
+
+// UI Child Class
 #include "UI_AddPatient.h"
 #include "UI_GetPatient.h"
+#include "UI_ChangeCategory.h"
 #include "UI_Print.h"
 
 void printPatient(Patient p);
-
-
+bool CheckValidCategory(int cateNum);
+bool CheckValidPIN(std::string pin);
 
 #endif // !__ASN2_PROJECTINCLUDES_H__
 

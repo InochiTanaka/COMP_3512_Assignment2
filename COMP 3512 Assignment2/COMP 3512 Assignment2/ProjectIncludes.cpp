@@ -17,3 +17,25 @@ void printPatient(Patient p)
 	std::cout << "Registered time : " << p.GetAdmissionTime() << "\n";
 	std::cout << "Category of seriousness : " << p.GetCategory() + 1 << "\n";
 }
+
+bool CheckValidCategory(int cateNum)
+{
+	if (0 > cateNum - 1 || cateNum - 1 > 5)
+	{
+		std::cout << "Please input Number of Seriousness's Category between 1 - 6 \n";
+		return false;
+	}
+	return true;
+}
+
+
+bool CheckValidPIN(std::string pin)
+{
+	if (pin.length() != 8)
+	{
+		std::cout << "input PIN is invalid : the length of PIN should be 8 numbers\n";
+		return false;
+	}
+
+	return true;
+}

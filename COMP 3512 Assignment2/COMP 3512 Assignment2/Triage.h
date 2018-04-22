@@ -37,15 +37,13 @@ public:
 public:
 	void Insert(Patient data);
 	void Remove(Patient data);
-	void Edit(Patient data);
 	void RemoveMostRecent();
+	bool SearchPatient(std::string str);
+	void UpdateList();
 
-	std::deque<Patient>& GetPriorityPatientList(PriorityLevel lvl)
-	{
-		return mHospitalList.GetList((int)lvl);
-	}
-private:
-	PriorityLevel DefineCondition(Patient data);
+	Patient& GetPatientByPIN(std::string str);
+
+	std::deque<Patient>& GetPriorityPatientList(PriorityLevel lvl)		{ return mHospitalList.GetList((int)lvl); }
 
 private:
 	PriorityQueue mHospitalList;

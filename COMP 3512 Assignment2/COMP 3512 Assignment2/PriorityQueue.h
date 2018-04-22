@@ -49,13 +49,13 @@ public:
 	void UpdateTime(std::string string);
 
 	//	Accessors ----------------------------------------------------------------------
-	Patient GetPatient(std::string name);
-	void UpdateList();
+	bool Seek(std::string PIN);
+	Patient& GetPatient(std::string PIN);
 
 	void RemoveHigestPriority();							// Pops after a general Update
+	int GetPatientCount() const							{ return numOfPatient; }
 
-
-	std::deque<Patient>& GetList(int category) { return mPatientList[category]; }
+	std::deque<Patient>& GetList(int category) const	{ return mPatientList[category]; }
 
 private:
 	int TimeCheck(std::vector<int> time);
@@ -67,10 +67,8 @@ private:
 
 private:
 	std::vector<int> mCurrentTime;
-public: // Temporary
 	std::deque<Patient>* mPatientList; // 2D Deque
 	int numOfPatient;
-
 };
 
 #endif

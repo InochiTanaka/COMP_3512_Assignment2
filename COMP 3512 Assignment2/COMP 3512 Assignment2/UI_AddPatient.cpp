@@ -15,6 +15,7 @@ const int UI_AddPatient::days_in_leap_year[] = { 0, 31, 29, 31, 30, 31, 30, 31, 
 void UI_AddPatient::Action()
 {
 	addSequence();
+
 }
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -26,7 +27,7 @@ bool UI_AddPatient::addSequence()
 {
 	Patient patient = input();
 
-	mHandler.Insert(patient);	// Input
+	mPrimaryTriage.Insert(patient);	// Input
 
 	//std::cout << "\n------------ New Patient Data Summary ------------\n";
 	//printPatient(patient);
@@ -208,6 +209,7 @@ Patient UI_AddPatient::inputPatientCategory(Patient p)
 
 	} while (!checkValidCategory(categorySeriousness));
 
+	// Indexing starts at 0
 	p.SetCategory((PriorityLevel)(categorySeriousness - 1));
 
 	return p;

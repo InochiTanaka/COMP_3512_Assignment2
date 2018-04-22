@@ -16,7 +16,7 @@ public:
 
 
 public:
-	Triage mHandler;
+	Triage mPrimaryTriage;
 
 };
 

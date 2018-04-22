@@ -2,10 +2,10 @@
 
 void UI_GetPatient::Print()
 {
-	for (int i = PriorityLevel::CRITICAL; i != PriorityLevel::END; ++i)
+	for (int i = PriorityLevel::CRITICAL; i != PriorityLevel::MAX; ++i)
 	{
-		if (UIBase::mHandler.GetPriorityPatientList((PriorityLevel)i).size() > 0)	// this list must not be empty
-			printPatient( ( UIBase::mHandler.GetPriorityPatientList((PriorityLevel)i)[0] ) );
+		if (UIBase::mPrimaryTriage.GetPriorityPatientList((PriorityLevel)i).size() > 0)	// this list must not be empty
+			printPatient( ( UIBase::mPrimaryTriage.GetPriorityPatientList((PriorityLevel)i)[0] ) );
 	}
 		
 }
@@ -13,5 +13,5 @@ void UI_GetPatient::Print()
 void UI_GetPatient::Action()
 {
 	Print();
-	UIBase::mHandler.RemoveMostRecent();
+	UIBase::mPrimaryTriage.RemoveMostRecent();
 }

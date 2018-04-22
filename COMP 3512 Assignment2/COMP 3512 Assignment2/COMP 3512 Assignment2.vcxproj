@@ -121,6 +121,7 @@
     <ClCompile Include="ProjectIncludes.cpp" />
     <ClCompile Include="Triage.cpp" />
     <ClCompile Include="UI_AddPatient.cpp" />
+    <ClCompile Include="UI_ChangeCategory.cpp" />
     <ClCompile Include="UI_GetPatient.cpp" />
     <ClCompile Include="UI_Main.cpp" />
     <ClCompile Include="UI_Print.cpp" />
@@ -133,6 +134,7 @@
     <ClInclude Include="ProjectIncludes.h" />
     <ClInclude Include="Triage.h" />
     <ClInclude Include="UIBase.h" />
+    <ClInclude Include="UI_ChangeCategory.h" />
     <ClInclude Include="UI_GetPatient.h" />
     <ClInclude Include="UI_Main.h" />
     <ClInclude Include="UI_Print.h" />

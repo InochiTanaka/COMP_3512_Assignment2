@@ -13,7 +13,7 @@ class UI_AddPatient : public UIBase
 public:
 	UI_AddPatient(Triage& Triageptr) 
 	{
-		UIBase::mHandler = Triageptr;
+		UIBase::mPrimaryTriage = Triageptr;
 	}
 	virtual ~UI_AddPatient() {}
 

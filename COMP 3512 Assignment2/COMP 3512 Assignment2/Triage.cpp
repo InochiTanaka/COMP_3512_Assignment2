@@ -41,46 +41,26 @@ void Triage::Remove(Patient data)
 	// Print !!
 }
 
-//------------------------------------------------------------------------------------------------------------------------
-//	@	void Triage::Edit(Patient data) 
-//------------------------------------------------------------------------------------------------------------------------
-//	Removes Patient from the list
-//------------------------------------------------------------------------------------------------------------------------
-void Triage::Edit(Patient data) 
-{
-}
-
 void Triage::RemoveMostRecent()
 {
-	mHospitalList.RemoveHigestPriority();
+	if (mHospitalList.GetPatientCount() > 0)
+		mHospitalList.RemoveHigestPriority();
+	else
+		std::cout << "No Patient to Attend to currently" << std::endl;
 }
 
-//------------------------------------------------------------------------------------------------------------------------
-//	@	PriorityLevel Triage::DefineCondition(Patient data) 
-//------------------------------------------------------------------------------------------------------------------------
-//	Defines Priority Condition of the Patient
-//------------------------------------------------------------------------------------------------------------------------
-PriorityLevel Triage::DefineCondition(Patient data) 
+bool Triage::SearchPatient(std::string str)
 {
-	std::string tempString = data.GetSymptoms();
-
-	if (tempString.compare("Critical and life-threatening, requires immediate care") == 0)
-		return PriorityLevel::CRITICAL;
-
-	if (tempString.compare("Critical, requires care `very soon'") == 0)
-		return PriorityLevel::CRITICAL_STABLE;
-
-	if (tempString.compare("Serious, requires care `soon'") == 0)
-		return PriorityLevel::SEVERE;
-
-	if (tempString.compare("Serious") == 0)
-		return PriorityLevel::SERIOUS;
-
-	if (tempString.compare("Non-serious") == 0)
-		return PriorityLevel::GOOD;
-
-	// If it isn't any of the above, then they are probably comfortable and/or not dying ƒ°(L„tM;)
-	return PriorityLevel::COMFORTABLE;
-
+	return mHospitalList.Seek(str);
 }
+
+Patient& Triage::GetPatientByPIN(std::string str)
+{
+	return mHospitalList.GetPatient(str);
+}
+void Triage::UpdateList()
+{
+	// Checks if all Patients Category are in the right Category
+}
+
 

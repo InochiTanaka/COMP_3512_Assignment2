@@ -7,7 +7,7 @@ class UI_GetPatient : public UIBase
 public:
 	UI_GetPatient(Triage& Triageptr)
 	{
-		UIBase::mHandler = Triageptr;
+		mPrimaryTriage = Triageptr;
 	}
 	virtual ~UI_GetPatient() {}
 

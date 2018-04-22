@@ -46,6 +46,7 @@ void UI_Main::Action()
 		}
 		else if (input == 'c' || input == '3')
 		{
+			UIAgent = new UI_ChangeCategory(*mTriageHandler);
 		}
 		else if (input == 'd' || input == '4')
 		{
