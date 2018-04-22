@@ -27,7 +27,11 @@
 
 #include "UIBase.h"
 #include "UI_AddPatient.h"
+#include "UI_GetPatient.h"
 #include "UI_Print.h"
+
+void printPatient(Patient p);
+
 
 
 #endif // !__ASN2_PROJECTINCLUDES_H__

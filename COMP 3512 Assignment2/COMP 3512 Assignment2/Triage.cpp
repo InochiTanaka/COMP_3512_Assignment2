@@ -50,6 +50,11 @@ void Triage::Edit(Patient data)
 {
 }
 
+void Triage::RemoveMostRecent()
+{
+	mHospitalList.RemoveHigestPriority();
+}
+
 //------------------------------------------------------------------------------------------------------------------------
 //	@	PriorityLevel Triage::DefineCondition(Patient data) 
 //------------------------------------------------------------------------------------------------------------------------

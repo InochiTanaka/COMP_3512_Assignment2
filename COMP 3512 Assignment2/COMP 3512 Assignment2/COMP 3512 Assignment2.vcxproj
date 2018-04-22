@@ -118,9 +118,10 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PriorityQueue.cpp" />
+    <ClCompile Include="ProjectIncludes.cpp" />
     <ClCompile Include="Triage.cpp" />
-    <ClCompile Include="TriageTest.cpp" />
     <ClCompile Include="UI_AddPatient.cpp" />
+    <ClCompile Include="UI_GetPatient.cpp" />
     <ClCompile Include="UI_Main.cpp" />
     <ClCompile Include="UI_Print.cpp" />
   </ItemGroup>
@@ -132,6 +133,7 @@
     <ClInclude Include="ProjectIncludes.h" />
     <ClInclude Include="Triage.h" />
     <ClInclude Include="UIBase.h" />
+    <ClInclude Include="UI_GetPatient.h" />
     <ClInclude Include="UI_Main.h" />
     <ClInclude Include="UI_Print.h" />
   </ItemGroup>

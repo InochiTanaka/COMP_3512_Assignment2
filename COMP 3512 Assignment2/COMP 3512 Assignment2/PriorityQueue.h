@@ -52,21 +52,15 @@ public:
 	Patient GetPatient(std::string name);
 	void UpdateList();
 
+	void RemoveHigestPriority();							// Pops after a general Update
+
+
 	std::deque<Patient>& GetList(int category) { return mPatientList[category]; }
-
-
-public:
-	// Local Functions
-	bool Save() {}
-	bool Load() {}
-	void Paint() {}
-	void Exit() {}
 
 private:
 	int TimeCheck(std::vector<int> time);
 	std::vector<int> GetTime(std::string string);
 
-										// Standard Update After External Input / output
 	void FixList();									// Update After Internal Alterations
 	void Promote(Patient data);
 	//PaitentListIterator Seek();

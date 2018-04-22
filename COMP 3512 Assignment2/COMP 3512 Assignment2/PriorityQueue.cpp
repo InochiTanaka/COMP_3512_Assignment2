@@ -73,6 +73,7 @@ PriorityQueue::AddToList(Patient data, PriorityLevel level)
 		RemoveFromList(data);
 		mPatientList[level].push_back(data);
 	}
+
 	++numOfPatient;
 
 	// ASN2 #9 Requirement
@@ -120,6 +121,16 @@ PriorityQueue::UpdatePatient(Patient data)
 void 
 PriorityQueue::UpdateList()
 {
+	//FixList();
+}
+
+//------------------------------------------------------------------------------------------------------------------------
+//	@	void PriorityQueue::FixList() 
+//------------------------------------------------------------------------------------------------------------------------
+//	Iterates through the List and Fixes list
+//------------------------------------------------------------------------------------------------------------------------
+void PriorityQueue::RemoveHigestPriority()
+{
 	// Remove the First from the list
 	for (int i = PriorityLevel::CRITICAL; i < PriorityLevel::END; ++i)
 	{
@@ -131,22 +142,19 @@ PriorityQueue::UpdateList()
 			break;
 		}
 	}
-
-	// Update Patient's Time
-	LIST_ITERATOR(x, y)
-		mPatientList[x][y].SetTimeDuration(TimeCheck(GetTime(mPatientList[x][y].GetAdmissionTime())));
-
-	FixList();
 }
 
 //------------------------------------------------------------------------------------------------------------------------
 //	@	void PriorityQueue::FixList() 
 //------------------------------------------------------------------------------------------------------------------------
-//	Iterates through the List and Fixes list
+//	Iterates through the List and Updates the time
 //------------------------------------------------------------------------------------------------------------------------
 void 
 PriorityQueue::FixList() 
 {
+	LIST_ITERATOR(x, y)
+		mPatientList[x][y].SetTimeDuration(TimeCheck(GetTime(mPatientList[x][y].GetAdmissionTime())));
+
 	// Checks if All Priority Levels are in the Correct Array
 	// Checks if Any Patient Needs Promotion
 }

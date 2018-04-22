@@ -12,7 +12,7 @@ UI_Main::UI_Main()
 void UI_Main::Print()
 {
 	cout << "\n------------ Main Menu ------------" << endl
-		 << "(a) Add new patient" << endl
+		<< "(a) Add new patient" << endl
 		<< "(b) Get next patient" << endl
 		<< "(c) Change patient category" << endl
 		<< "(d) Save patient list" << endl
@@ -42,6 +42,7 @@ void UI_Main::Action()
 		}
 		else if (input == 'b' || input == '2')
 		{
+			UIAgent = new UI_GetPatient(*mTriageHandler);
 		}
 		else if (input == 'c' || input == '3')
 		{
@@ -57,12 +58,13 @@ void UI_Main::Action()
 			UIAgent = new UI_Print(*mTriageHandler);
 		}
 
-		// Do Action
+		// Do Action based on state
 		UIAgent->Action();
+
 	} //end of else (input == 'g' || input == '7')
 
 	cout << endl << endl;		// Spacing
-	delete UIAgent;		// After you finished action, delete ptr
+	delete UIAgent;				// After you finished action, delete ptr
 	UIAgent = nullptr;	
 
 }

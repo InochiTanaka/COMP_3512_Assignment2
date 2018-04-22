@@ -38,6 +38,8 @@ public:
 	void Insert(Patient data);
 	void Remove(Patient data);
 	void Edit(Patient data);
+	void RemoveMostRecent();
+
 	std::deque<Patient>& GetPriorityPatientList(PriorityLevel lvl)
 	{
 		return mHospitalList.GetList((int)lvl);

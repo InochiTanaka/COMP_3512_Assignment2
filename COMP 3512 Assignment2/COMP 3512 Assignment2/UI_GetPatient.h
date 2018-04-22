@@ -2,14 +2,14 @@
 
 #include "ProjectIncludes.h"
 
-class UI_Print : public UIBase
+class UI_GetPatient : public UIBase
 {
 public:
-	UI_Print(Triage& Triageptr) 
+	UI_GetPatient(Triage& Triageptr)
 	{
 		UIBase::mHandler = Triageptr;
 	}
-	virtual ~UI_Print() {}
+	virtual ~UI_GetPatient() {}
 
 public:
 	virtual void Print();
