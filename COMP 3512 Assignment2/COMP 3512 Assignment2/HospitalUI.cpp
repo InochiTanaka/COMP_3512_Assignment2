@@ -1,4 +1,3 @@
-
 #include "HospitalUI.h"
 
 // Inochi's

@@ -54,7 +54,7 @@ class HospitalUI
 private:
 	static const int days_in_regular_year[];
 	static const int days_in_leap_year[];
-	std::vector<Patient> patientList;
+	//std::vector<Patient> patientList;
 	//std::deque<Patient> mTestList;
 	
 
@@ -81,4 +81,3 @@ public:
 
 
 };
-
