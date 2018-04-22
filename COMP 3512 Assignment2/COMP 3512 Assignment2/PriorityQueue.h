@@ -57,12 +57,17 @@ public:
 
 	std::deque<Patient>& GetList(int category) const	{ return mPatientList[category]; }
 
+	//	Functions ----------------------------------------------------------------------
+	void FixList();
+
+
+
 private:
 	int TimeCheck(std::vector<int> time);
 	std::vector<int> GetTime(std::string string);
 
-	void FixList();									// Update After Internal Alterations
-	void Promote(Patient data);
+	void UpdateAllPatient();									// Update After Internal Alterations
+	void Promote(PaitentIterator itrPtr, PriorityLevel newLevel, PriorityLevel prev);
 	//PaitentListIterator Seek();
 
 private:

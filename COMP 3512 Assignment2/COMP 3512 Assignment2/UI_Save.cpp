@@ -5,13 +5,13 @@ void UI_Save::Save()
 	int count = 0;
 	std::ofstream ofs("patient.txt");
 
-	for (int currentLvl = PriorityLevel::CRITICAL; currentLvl != PriorityLevel::END; ++currentLvl)
+	for (int currentLvl = PriorityLevel::CRITICAL; currentLvl != PriorityLevel::MAX; ++currentLvl)
 	{
-		UIBase::mHandler.GetPriorityPatientList((PriorityLevel)currentLvl).size();
-		for (int x = 0; x < UIBase::mHandler.GetPriorityPatientList((PriorityLevel)currentLvl).size(); ++x)
+		UIBase::mPrimaryTriage.GetPriorityPatientList((PriorityLevel)currentLvl).size();
+		for (int x = 0; x < UIBase::mPrimaryTriage.GetPriorityPatientList((PriorityLevel)currentLvl).size(); ++x)
 		{
 			ofs << "\n------------ Patient Data " << count++ << " ------------\n";
-			printPatient(UIBase::mHandler.GetPriorityPatientList((PriorityLevel)currentLvl)[x], ofs);
+			printPatient(UIBase::mPrimaryTriage.GetPriorityPatientList((PriorityLevel)currentLvl)[x], ofs);
 		}
 	}
 	ofs.close();

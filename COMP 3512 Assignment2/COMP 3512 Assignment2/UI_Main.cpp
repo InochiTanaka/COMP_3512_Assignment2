@@ -31,7 +31,6 @@ void UI_Main::Action()
 	cin.ignore(100, '\n');	// Get Buffer values / manual Flush
 	//fflush(stdin);			// Flush cin
 
-	system("cls");
 	if (input == 'g' || input == '7')
 		bRunning = false;				// Immediately quit
 	else

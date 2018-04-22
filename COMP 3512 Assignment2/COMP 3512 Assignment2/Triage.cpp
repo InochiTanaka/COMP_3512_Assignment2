@@ -26,7 +26,6 @@ void Triage::Insert(Patient data)
 	//mHospitalList.UpdateTime(data.GetAdmissionTime());		// Updates List's Time
 
 	//mHospitalList.UpdateList();					// Update List 
-	// Print !!
 }
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -58,9 +57,14 @@ Patient& Triage::GetPatientByPIN(std::string str)
 {
 	return mHospitalList.GetPatient(str);
 }
-void Triage::UpdateList()
+void Triage::UpdateList()	// Fixes List
 {
 	// Checks if all Patients Category are in the right Category
+	mHospitalList.FixList();
+
+	// Promote Based on Time
+	//mHospitalList.UpdateList();
+
 }
 
 

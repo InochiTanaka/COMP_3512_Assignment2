@@ -71,6 +71,7 @@ PriorityQueue::AddToList(Patient data, PriorityLevel level)
 
 		// After Adding, record that this is the latest addition
 		UpdateTime(data.GetAdmissionTime());
+		UpdateAllPatient();
 	}
 	else
 		std::cout << "Patient already is on the list" << endl;
@@ -132,13 +133,11 @@ void PriorityQueue::RemoveHigestPriority()
 //	Iterates through the List and Updates the time
 //------------------------------------------------------------------------------------------------------------------------
 void 
-PriorityQueue::FixList() 
+PriorityQueue::UpdateAllPatient() 
 {
-	LIST_ITERATOR(x, y)
-		mPatientList[x][y].SetTimeDuration(TimeCheck(GetTime(mPatientList[x][y].GetAdmissionTime())));
-
-	// Checks if All Priority Levels are in the Correct Array
-	// Checks if Any Patient Needs Promotion
+	LIST_ITERATOR(level, y)
+		if(mPatientList[level].size() > 0)
+			mPatientList[level][y].SetTimeDuration(TimeCheck(GetTime(mPatientList[level][y].GetAdmissionTime())));
 }
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -147,9 +146,37 @@ PriorityQueue::FixList()
 //	Iterates through the List and Fixes list
 //------------------------------------------------------------------------------------------------------------------------
 void 
-PriorityQueue::Promote(Patient data)
+PriorityQueue::Promote(PaitentIterator itrPtr, PriorityLevel newLevel, PriorityLevel prev)
 {
+	Patient temp = (*itrPtr); // Copy
+	mPatientList[prev].erase(itrPtr);
+	mPatientList[newLevel].push_back(temp);
+}
 
+//------------------------------------------------------------------------------------------------------------------------
+//	@	void PriorityQueue::FixList()
+//------------------------------------------------------------------------------------------------------------------------
+// Checks if all Patients Category are in the right Category
+//------------------------------------------------------------------------------------------------------------------------
+void 
+PriorityQueue::FixList()
+{
+	for(int level = PriorityLevel::CRITICAL; level != PriorityLevel::MAX; ++level)
+		if (mPatientList[level].size() > 0)
+		{
+			for (PaitentIterator listItr = mPatientList[level].begin(); listItr != mPatientList[level].end(); ++listItr)
+			{
+				if ( (*listItr).GetCategory() != level)
+				{
+					Promote(listItr, (PriorityLevel)(*listItr).GetCategory(), (PriorityLevel)level);
+
+					if (mPatientList[level].size() > 0)	// if there is still as list, reset the iterator, else the element we moved was the last element, just break the loop and move on
+						listItr = mPatientList[level].begin();
+					else
+						break;
+				}
+			}
+		}
 }
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -170,8 +197,8 @@ PriorityQueue::TimeCheck(vector<int> time)
 
 		return diff;
 	}
-
-	return (mCurrentTime[0] - (time[0] - 24 ));		//  24 hour clock reverts to 0 on the 24th hour. 
+	else if (diff < 0)
+		return (mCurrentTime[0] - (time[0] - 24 ));		//  24 hour clock reverts to 0 on the 24th hour. 
 }
 
 bool PriorityQueue::Seek(std::string PIN)
@@ -248,9 +275,3 @@ PriorityQueue::GetTime(std::string string)
 
 	return temp;
 }
-
-//PaitentListIterator 
-//PriorityQueue::Seek()
-//{
-//
-//}
