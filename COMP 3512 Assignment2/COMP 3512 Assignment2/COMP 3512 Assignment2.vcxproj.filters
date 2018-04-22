@@ -48,11 +48,7 @@
     <ClCompile Include="UI_Save.cpp">
       <Filter>Source Files\UI Actions</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="UI_Load.cpp">
-=======
     <ClCompile Include="UI_ChangeCategory.cpp">
->>>>>>> 25d686620e401c0c5001d694ec20b3d4575b23b7
       <Filter>Source Files\UI Actions</Filter>
     </ClCompile>
   </ItemGroup>
@@ -91,9 +87,6 @@
       <Filter>Header Files\UI Actions</Filter>
     </ClInclude>
     <ClInclude Include="UI_Save.h">
-      <Filter>Header Files\UI Actions</Filter>
-    </ClInclude>
-    <ClInclude Include="UI_Load.h">
       <Filter>Header Files\UI Actions</Filter>
     </ClInclude>
   </ItemGroup>

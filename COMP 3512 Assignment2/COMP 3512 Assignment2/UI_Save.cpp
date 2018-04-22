@@ -10,12 +10,8 @@ void UI_Save::Save()
 		UIBase::mPrimaryTriage.GetPriorityPatientList((PriorityLevel)currentLvl).size();
 		for (int x = 0; x < UIBase::mPrimaryTriage.GetPriorityPatientList((PriorityLevel)currentLvl).size(); ++x)
 		{
-<<<<<<< HEAD
-			printPatient(UIBase::mHandler.GetPriorityPatientList((PriorityLevel)currentLvl)[x], ofs);
-=======
 			ofs << "\n------------ Patient Data " << count++ << " ------------\n";
 			printPatient(UIBase::mPrimaryTriage.GetPriorityPatientList((PriorityLevel)currentLvl)[x], ofs);
->>>>>>> 25d686620e401c0c5001d694ec20b3d4575b23b7
 		}
 	}
 	ofs.close();
