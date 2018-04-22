@@ -274,6 +274,25 @@ bool HospitalUI::checkValidBirthDay(int y, int m, int d)
 
 	//Check input BirthDay is valid
 
+	const int* days;
+
+	if (y % 4 == 0) {
+		if (y % 100 == 0) {
+			if (y % 400 == 0) {
+				days = days_in_leap_year;
+			}
+			else {
+				days = days_in_regular_year;
+			}
+		}
+		else {
+			days = days_in_leap_year;
+		}
+	}
+	else {
+		days = days_in_regular_year;
+	}
+
 	std::stringstream ssY, ssM, ssD;
 	ssY << y;
 	ssM << m;
@@ -283,27 +302,32 @@ bool HospitalUI::checkValidBirthDay(int y, int m, int d)
 	std::string stM = ssM.str();
 	std::string stD = ssD.str();
 
-	if (stY.length() != 4)
+	if (stY.length() != 4
+		|| y > currentYear)
 	{
-		std::cout << " input BirthDay is invalid : the year is not 4 digits \n";
+		std::cout << "input BirthDay is invalid : the year should be 4 digits \n";
 		return false;
 	}
 
-	if (stM.length() > 2)
+	if (stM.length() > 2
+		|| !(1 <= m && m <= 12))
 	{
-		std::cout << " input BirthDay is invalid : the month is not less than 2 digits \n";
+		std::cout << "input BirthDay is invalid : the month should less than 2 digits and between 1 - 12 \n";
 		return false;
 	}
 
-	if (stD.length() > 2)
+	if (stD.length() > 2
+		|| !(1 <= d && d <= days[m]))
 	{
-		std::cout << " input BirthDay is invalid : the day is not less than 2 digits \n";
+		std::cout << "input BirthDay is invalid : the day is not less than 2 digits and valid day\n";
 		return false;
 	}
 
-	if (getAdmissionTime(y, m, d, 0, 0) > getAdmissionTime(currentYear, currentMonth, currentDay, 0, 0))
+	if ((y > currentYear)
+		&& (y == currentYear && m > currentMonth)
+		&& (y == currentYear && m == currentMonth && d > currentDay))
 	{
-		std::cout << " input BirthDay is invalid : the date is in the future \n";
+		std::cout << "input BirthDay is invalid : the Date is in the future \n";
 		return false;
 	}
 
@@ -348,14 +372,6 @@ bool HospitalUI::checkValidTime(int h, int min)
 	if ((h < 0 || 23 < h) || (min < 0 || 59 < min))
 	{
 		std::cout << " input time is invalid : the input hour should be 0 - 23, input minutes should be 0 - 59 \n";
-		return false;
-	}
-
-
-	//Check input date/time is at the day of "MAX_RESERVATION_MONTH" later
-	if (getAdmissionTime(currentYear, currentMonth, currentDay, currentHour, currentMin) < getAdmissionTime(currentYear, currentMonth, currentDay, h, min))
-	{
-		std::cout << " input time is invalid : the time is in the future \n";
 		return false;
 	}
 
