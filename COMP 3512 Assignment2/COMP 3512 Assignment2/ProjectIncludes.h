@@ -34,6 +34,7 @@
 #include "UI_GetPatient.h"
 #include "UI_Print.h"
 #include "UI_Save.h"
+#include "UI_Load.h"
 
 void printPatient(Patient p);
 

@@ -48,6 +48,9 @@
     <ClCompile Include="UI_Save.cpp">
       <Filter>Source Files\UI Actions</Filter>
     </ClCompile>
+    <ClCompile Include="UI_Load.cpp">
+      <Filter>Source Files\UI Actions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PriorityQueue.h">
@@ -81,6 +84,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UI_Save.h">
+      <Filter>Header Files\UI Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Load.h">
       <Filter>Header Files\UI Actions</Filter>
     </ClInclude>
   </ItemGroup>

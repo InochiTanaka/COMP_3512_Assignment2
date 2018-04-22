@@ -181,12 +181,12 @@ Patient HospitalUI::inputPatientCategory(Patient p)
 	do
 	{
 		std::cout << "Category List of Seriousness :\n";
-		std::cout << "1 : Critical and life-threatening, requires immediate care \n";
-		std::cout << "2 : Critical, requires care every soon \n";
-		std::cout << "3 : Serious, requires care 'soon' \n";
-		std::cout << "4 : Serious \n";
-		std::cout << "5 : Non-serious \n";
-		std::cout << "6 : Not a priority \n" << "\n";
+		std::cout << "0 : Critical and life-threatening, requires immediate care \n";
+		std::cout << "1 : Critical, requires care every soon \n";
+		std::cout << "2 : Serious, requires care 'soon' \n";
+		std::cout << "3 : Serious \n";
+		std::cout << "4 : Non-serious \n";
+		std::cout << "5 : Not a priority \n" << "\n";
 		std::cout << "Input Patient's Number of Seriousness's Category: ";
 
 		std::cin >> categorySeriousness;
@@ -392,7 +392,7 @@ bool HospitalUI::checkValidTime(int h, int min)
 
 bool HospitalUI::checkValidCategory(int cateNum)
 {
-	if (0 > cateNum - 1 || cateNum - 1 > 5)
+	if (0 > cateNum || cateNum > 5)
 	{
 		std::cout << "Please input Number of Seriousness's Category between 1 - 6 \n";
 		return false;

@@ -1,5 +1,5 @@
 #include "CppUnitTest.h"
-#include "../COMP 3512 Assignment2/HospitalUI.h"
+#include "../COMP 3512 Assignment2/UI_AddPatient.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -8,8 +8,8 @@ namespace UnitTests
 	TEST_CLASS(UnitTestHosptialUI)
 	{
 	public:
-		HospitalUI unitTestHostpitalUI;
-		
+		UI_AddPatient unitTestHostpitalUI;
+
 		TEST_METHOD(Test_check_input_name_valid)
 		{
 			//Try to input first, last, and middle name. 
@@ -163,7 +163,7 @@ namespace UnitTests
 			Assert::AreEqual(false,
 				unitTestHostpitalUI.checkValidPIN(pin));
 
-			 pin = "0123456";
+			pin = "0123456";
 
 			Assert::AreEqual(false,
 				unitTestHostpitalUI.checkValidPIN(pin));
@@ -254,12 +254,12 @@ namespace UnitTests
 		TEST_METHOD(Test_check_input_category_valid)
 		{
 			//check by valid category number
-			int catNum = 1;
+			int catNum = 0;
 
 			Assert::AreEqual(true,
 				unitTestHostpitalUI.checkValidCategory(catNum));
 
-			catNum = 6;
+			catNum = 5;
 
 			Assert::AreEqual(true,
 				unitTestHostpitalUI.checkValidCategory(catNum));
@@ -268,12 +268,12 @@ namespace UnitTests
 		TEST_METHOD(Test_check_input_category_invalid)
 		{
 			//check by invalid category number
-			int catNum = 0;
+			int catNum = -1;
 
 			Assert::AreEqual(false,
 				unitTestHostpitalUI.checkValidCategory(catNum));
 
-			catNum = 7;
+			catNum = 6;
 
 			Assert::AreEqual(false,
 				unitTestHostpitalUI.checkValidCategory(catNum));
