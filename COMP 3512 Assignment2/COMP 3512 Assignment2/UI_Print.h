@@ -7,7 +7,7 @@ class UI_Print : public UIBase
 public:
 	UI_Print(Triage& Triageptr) 
 	{
-		UIBase::mHandler = Triageptr;
+		mPrimaryTriage = Triageptr;
 	}
 	virtual ~UI_Print() {}
 

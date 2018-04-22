@@ -31,7 +31,6 @@ void UI_Main::Action()
 	cin.ignore(100, '\n');	// Get Buffer values / manual Flush
 	//fflush(stdin);			// Flush cin
 
-	system("cls");
 	if (input == 'g' || input == '7')
 		bRunning = false;				// Immediately quit
 	else
@@ -46,6 +45,7 @@ void UI_Main::Action()
 		}
 		else if (input == 'c' || input == '3')
 		{
+			UIAgent = new UI_ChangeCategory(*mTriageHandler);
 		}
 		else if (input == 'd' || input == '4')
 		{

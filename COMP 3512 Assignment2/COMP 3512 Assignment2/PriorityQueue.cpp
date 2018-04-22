@@ -17,7 +17,7 @@
 //-- Class Definitions ---------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------
 
-#define LIST_ITERATOR(x, y) for(int x = PriorityLevel::CRITICAL; x != PriorityLevel::END; ++x) for(int y = 0; y < mPatientList[x].size(); ++y)  // 魔法です
+#define LIST_ITERATOR(x, y) for(int x = PriorityLevel::CRITICAL; x != PriorityLevel::MAX; ++x) for(int y = 0; y < mPatientList[x].size(); ++y)  // 魔法です
 using namespace std; // safe to call in this cpp
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ using namespace std; // safe to call in this cpp
 PriorityQueue::PriorityQueue()
 	: numOfPatient(0)
 {
-	mPatientList = new std::deque<Patient>[PriorityLevel::END];	// Magic, 出来るだから <-- Look chris, Moon runes
+	mPatientList = new std::deque<Patient>[PriorityLevel::MAX];	// Magic, 出来るだから <-- Look chris, Moon runes
 	// Empty
 }
 
@@ -39,7 +39,7 @@ PriorityQueue::PriorityQueue()
 //------------------------------------------------------------------------------------------------------------------------
 PriorityQueue::~PriorityQueue()
 {
-	// Empty
+	delete[] mPatientList;
 }
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ PriorityQueue::AddToList(Patient data, PriorityLevel level)
 	bool fDuplicatePatient = false;
 
 	// Iterate through to see if patient is already added
-	for (int prioritylevel = PriorityLevel::CRITICAL; prioritylevel != PriorityLevel::END; ++prioritylevel)	// Iterating by Enum values
+	for (int prioritylevel = PriorityLevel::CRITICAL; prioritylevel != PriorityLevel::MAX; ++prioritylevel)	// Iterating by Enum values
 		for (int i = 0; i < mPatientList[prioritylevel].size(); ++i)										// Inner List Iteration
 		{
 			if (mPatientList[prioritylevel][i].GetPIN().compare(PIN))  // Triple Confirmation it if it's the same patient
@@ -62,66 +62,20 @@ PriorityQueue::AddToList(Patient data, PriorityLevel level)
 					fDuplicatePatient = true;
 		}
 
+
 	// Push to the Category Level
 	if (!fDuplicatePatient)
 	{
 		mPatientList[level].push_back(data);
+		++numOfPatient;
+
+		// After Adding, record that this is the latest addition
+		UpdateTime(data.GetAdmissionTime());
+		UpdateAllPatient();
 	}
-	else	// Assume the Patient is updated
-	{
-		// Remove him from the list and readd him to the new level
-		RemoveFromList(data);
-		mPatientList[level].push_back(data);
-	}
+	else
+		std::cout << "Patient already is on the list" << endl;
 
-	++numOfPatient;
-
-	// ASN2 #9 Requirement
-	//	Removing After Adding
-
-	// No point popping the first that was entered
-	//if(numOfPatient > 1)
-		//UpdateList();
-
-	//	mPatientList[data.GetPriorityLevel()].push_back(data);	// Addes to the end of the Catagory Level
-}
-
-//------------------------------------------------------------------------------------------------------------------------
-//	@	void PriorityQueue::RemovePatient(Patient)
-//------------------------------------------------------------------------------------------------------------------------
-//	Removes a patient from the Queue
-//------------------------------------------------------------------------------------------------------------------------
-void
-PriorityQueue::RemoveFromList(Patient data)
-{
-	string IDHolder = data.GetPIN();
-	// Seek by ID No
-	LIST_ITERATOR(x, y)
-		IDHolder.compare(mPatientList[x][y].GetPIN());
-
-}
-
-//------------------------------------------------------------------------------------------------------------------------
-//	@	Patient PriorityQueue::UpdatePatient(Patient)
-//------------------------------------------------------------------------------------------------------------------------
-//	Removes a patient from the Queue
-//------------------------------------------------------------------------------------------------------------------------
-Patient 
-PriorityQueue::UpdatePatient(Patient data)
-{
-	return Patient();
-}
-
-//------------------------------------------------------------------------------------------------------------------------
-//	@	void PriorityQueue::Update()
-//------------------------------------------------------------------------------------------------------------------------
-//	Called after every "edit" to the Queue.
-//	After every 
-//------------------------------------------------------------------------------------------------------------------------
-void 
-PriorityQueue::UpdateList()
-{
-	//FixList();
 }
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -131,15 +85,18 @@ PriorityQueue::UpdateList()
 //------------------------------------------------------------------------------------------------------------------------
 void PriorityQueue::RemoveHigestPriority()
 {
-	// Remove the First from the list
-	for (int i = PriorityLevel::CRITICAL; i < PriorityLevel::END; ++i)
+	if (numOfPatient > 0)
 	{
-		// If not Empty then Pop the front, Do this only once
-		if (mPatientList[i].size() > 0)
+		// Remove the First from the list
+		for (int i = PriorityLevel::CRITICAL; i < PriorityLevel::MAX; ++i)
 		{
-			mPatientList[i].pop_front();
-			--numOfPatient;
-			break;
+			// If not Empty then Pop the front, Do this only once
+			if (mPatientList[i].size() > 0)
+			{
+				mPatientList[i].pop_front();
+				--numOfPatient;
+				break;
+			}
 		}
 	}
 }
@@ -150,13 +107,11 @@ void PriorityQueue::RemoveHigestPriority()
 //	Iterates through the List and Updates the time
 //------------------------------------------------------------------------------------------------------------------------
 void 
-PriorityQueue::FixList() 
+PriorityQueue::UpdateAllPatient() 
 {
-	LIST_ITERATOR(x, y)
-		mPatientList[x][y].SetTimeDuration(TimeCheck(GetTime(mPatientList[x][y].GetAdmissionTime())));
-
-	// Checks if All Priority Levels are in the Correct Array
-	// Checks if Any Patient Needs Promotion
+	LIST_ITERATOR(level, y)
+		if(mPatientList[level].size() > 0)
+			mPatientList[level][y].SetTimeDuration(TimeCheck(GetTime(mPatientList[level][y].GetAdmissionTime())));
 }
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -165,9 +120,74 @@ PriorityQueue::FixList()
 //	Iterates through the List and Fixes list
 //------------------------------------------------------------------------------------------------------------------------
 void 
-PriorityQueue::Promote(Patient data)
+PriorityQueue::Promote(PaitentIterator itrPtr, PriorityLevel newLevel, PriorityLevel prev)
 {
+	Patient temp = (*itrPtr); // Copy
+	mPatientList[prev].erase(itrPtr);
+	mPatientList[newLevel].push_back(temp);
+}
 
+//------------------------------------------------------------------------------------------------------------------------
+//	@	void PriorityQueue::FixList()
+//------------------------------------------------------------------------------------------------------------------------
+// Checks if all Patients Category are in the right Category
+//------------------------------------------------------------------------------------------------------------------------
+void 
+PriorityQueue::FixList()
+{
+	for(int level = PriorityLevel::CRITICAL; level != PriorityLevel::MAX; ++level)
+		if (mPatientList[level].size() > 0)	
+		{
+			for (PaitentIterator listItr = mPatientList[level].begin(); listItr != mPatientList[level].end(); ++listItr)
+			{
+				if ( (*listItr).GetCategory() != level)
+				{
+					Promote(listItr, (PriorityLevel)(*listItr).GetCategory(), (PriorityLevel)level);
+
+					if (mPatientList[level].size() > 0)	// if there is still as list, reset the iterator, else the element we moved was the last element, just break the loop and move on
+						listItr = mPatientList[level].begin();
+					else
+						break;
+				}
+			}
+		}
+}
+
+//------------------------------------------------------------------------------------------------------------------------
+//	@	int PriorityQueue::TimeCheck(vector<int> time)
+//------------------------------------------------------------------------------------------------------------------------
+// Promote Based on Time
+//------------------------------------------------------------------------------------------------------------------------
+void PriorityQueue::UpdateList()
+{
+	for (int level = PriorityLevel::CRITICAL_STABLE; level != PriorityLevel::MAX; ++level)
+		for (int i = 0; i < mPatientList[level].size(); ++i)
+		{
+			if (level == PriorityLevel::CRITICAL_STABLE)
+			{
+				if (mPatientList[level][i].GetTimePassed() >= 1)
+				{
+					mPatientList[level][i].SetCategory(mPatientList[level][i].GetCategory() - 1);
+					mPatientList[level][i].SetTimeDuration(0);			// reset counter
+				}
+			}
+			else if (level <= PriorityLevel::SERIOUS)
+			{
+				if (mPatientList[level][i].GetTimePassed() >= 2)
+				{
+					mPatientList[level][i].SetCategory(mPatientList[level][i].GetCategory() - 1);
+					mPatientList[level][i].SetTimeDuration(0);			// reset counter
+				}
+			}
+			else  if (level <= PriorityLevel::COMFORTABLE)
+			{
+				if (mPatientList[level][i].GetTimePassed() >= 3)
+				{
+					mPatientList[level][i].SetCategory(mPatientList[level][i].GetCategory() - 1);
+					mPatientList[level][i].SetTimeDuration(0);			// reset counter
+				}
+			}
+		}
 }
 
 //------------------------------------------------------------------------------------------------------------------------
@@ -188,22 +208,40 @@ PriorityQueue::TimeCheck(vector<int> time)
 
 		return diff;
 	}
+	else if (diff < 0)
+		return (mCurrentTime[0] - (time[0] - 24 ));		//  24 hour clock reverts to 0 on the 24th hour. 
 
-	return (mCurrentTime[0] - (time[0] - 24 ));		//  24 hour clock reverts to 0 on the 24th hour. 
+	return 0;
 }
 
 //------------------------------------------------------------------------------------------------------------------------
-//	@	Patient PriorityQueue::GetPatient(String)
+//	@	bool PriorityQueue::Seek(std::string PIN)
+//------------------------------------------------------------------------------------------------------------------------
+//	Searches through the whole list for a matching PIN
+//------------------------------------------------------------------------------------------------------------------------
+bool 
+PriorityQueue::Seek(std::string PIN)
+{
+	LIST_ITERATOR(priority, x)
+		if (PIN.compare(mPatientList[priority][x].GetPIN()) == 0)
+			return true;
+	return false;
+}
+
+//------------------------------------------------------------------------------------------------------------------------
+//	@	Patient& PriorityQueue::GetPatient(String)
 //------------------------------------------------------------------------------------------------------------------------
 //	Returns Patient for editting, searches by name
 //------------------------------------------------------------------------------------------------------------------------
-Patient
-PriorityQueue::GetPatient(std::string name)
+Patient&
+PriorityQueue::GetPatient(std::string PIN)
 {
 	LIST_ITERATOR(priority, x)
-		if (name.compare(mPatientList[priority][x].GetFullName()) == 0)
-			return Patient();
+		if(mPatientList[priority].size() > 0)
+			if (PIN.compare(mPatientList[priority][x].GetPIN()) == 0)
+				return mPatientList[priority][x];
 }
+
 
 //------------------------------------------------------------------------------------------------------------------------
 //	@	Void PriorityQueue::GetTime(std::string string)
@@ -256,9 +294,3 @@ PriorityQueue::GetTime(std::string string)
 
 	return temp;
 }
-
-//PaitentListIterator 
-//PriorityQueue::Seek()
-//{
-//
-//}

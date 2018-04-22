@@ -18,7 +18,8 @@
 //------------------------------------------------------------------------------------------------------------------------
 //	Places the patient in the correct Priority
 //------------------------------------------------------------------------------------------------------------------------
-void Triage::Insert(Patient data) 
+void 
+Triage::Insert(Patient data) 
 {
 	//PriorityLevel eStatus = DefineCondition(data);
 	mHospitalList.AddToList(data, (PriorityLevel)data.GetCategory());
@@ -26,61 +27,57 @@ void Triage::Insert(Patient data)
 	//mHospitalList.UpdateTime(data.GetAdmissionTime());		// Updates List's Time
 
 	//mHospitalList.UpdateList();					// Update List 
-	// Print !!
 }
 
 //------------------------------------------------------------------------------------------------------------------------
-//	@	void Triage::Remove(Patient data) 
+//	@	void Triage::RemoveMostRecent()
 //------------------------------------------------------------------------------------------------------------------------
-//	Removes Patient from the list
+//	Removes Highest Priority Patient from the list
 //------------------------------------------------------------------------------------------------------------------------
-void Triage::Remove(Patient data) 
+void 
+Triage::RemoveMostRecent()
 {
-	mHospitalList.RemoveFromList(data);
-	//mHospitalList.UpdateList();		// Fixes list after change, if needed
-	// Print !!
+	if (mHospitalList.GetPatientCount() > 0)
+		mHospitalList.RemoveHigestPriority();
+	else
+		std::cout << "No Patient to Attend to currently" << std::endl;
 }
 
 //------------------------------------------------------------------------------------------------------------------------
-//	@	void Triage::Edit(Patient data) 
+//	@	bool Triage::SearchPatient(std::string str)
 //------------------------------------------------------------------------------------------------------------------------
-//	Removes Patient from the list
+//	Checks if there is such patient with the correct PIN
+//	Prevents null reference returns
 //------------------------------------------------------------------------------------------------------------------------
-void Triage::Edit(Patient data) 
+bool 
+Triage::SearchPatient(std::string str)
 {
+	return mHospitalList.Seek(str);
 }
 
-void Triage::RemoveMostRecent()
+//------------------------------------------------------------------------------------------------------------------------
+//	@	Patient& Triage::GetPatientByPIN(std::string str)
+//------------------------------------------------------------------------------------------------------------------------
+//	Returns the Patient that will need correction/update/editing
+//------------------------------------------------------------------------------------------------------------------------
+Patient& 
+Triage::GetPatientByPIN(std::string str)
 {
-	mHospitalList.RemoveHigestPriority();
+	return mHospitalList.GetPatient(str);
 }
 
 //------------------------------------------------------------------------------------------------------------------------
-//	@	PriorityLevel Triage::DefineCondition(Patient data) 
+//	@	void Triage::UpdateList()
 //------------------------------------------------------------------------------------------------------------------------
-//	Defines Priority Condition of the Patient
+//	Fixes List after any update with Time or Category
 //------------------------------------------------------------------------------------------------------------------------
-PriorityLevel Triage::DefineCondition(Patient data) 
+void 
+Triage::UpdateList()	
 {
-	std::string tempString = data.GetSymptoms();
+	// Promote Based on Time
+	mHospitalList.UpdateList();
 
-	if (tempString.compare("Critical and life-threatening, requires immediate care") == 0)
-		return PriorityLevel::CRITICAL;
-
-	if (tempString.compare("Critical, requires care `very soon'") == 0)
-		return PriorityLevel::CRITICAL_STABLE;
-
-	if (tempString.compare("Serious, requires care `soon'") == 0)
-		return PriorityLevel::SEVERE;
-
-	if (tempString.compare("Serious") == 0)
-		return PriorityLevel::SERIOUS;
-
-	if (tempString.compare("Non-serious") == 0)
-		return PriorityLevel::GOOD;
-
-	// If it isn't any of the above, then they are probably comfortable and/or not dying ƒ°(L„tM;)
-	return PriorityLevel::COMFORTABLE;
+	// Checks if all Patients Category are in the right Category
+	mHospitalList.FixList();
 
 }
-

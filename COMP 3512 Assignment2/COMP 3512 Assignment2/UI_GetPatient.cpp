@@ -1,17 +1,38 @@
 #include "UI_GetPatient.h"
 
-void UI_GetPatient::Print()
+//------------------------------------------------------------------------------------------------------------------------
+//	@	UI_GetPatient::UI_GetPatient(Triage & Triageptr)
+//------------------------------------------------------------------------------------------------------------------------
+//	 Default Constructor that takes the Address of the Triage Class
+//------------------------------------------------------------------------------------------------------------------------
+UI_GetPatient::UI_GetPatient(Triage & Triageptr)
 {
-	for (int i = PriorityLevel::CRITICAL; i != PriorityLevel::END; ++i)
+	mPrimaryTriage = Triageptr;
+}
+
+//------------------------------------------------------------------------------------------------------------------------
+//	@	void UI_GetPatient::Print()
+//------------------------------------------------------------------------------------------------------------------------
+//	Class's Print Msg requirements
+//------------------------------------------------------------------------------------------------------------------------
+void 
+UI_GetPatient::Print()
+{
+	for (int i = PriorityLevel::CRITICAL; i != PriorityLevel::MAX; ++i)
 	{
-		if (UIBase::mHandler.GetPriorityPatientList((PriorityLevel)i).size() > 0)	// this list must not be empty
-			printPatient( ( UIBase::mHandler.GetPriorityPatientList((PriorityLevel)i)[0] ) );
+		if (UIBase::mPrimaryTriage.GetPriorityPatientList((PriorityLevel)i).size() > 0)	// this list must not be empty
+			printPatient( ( UIBase::mPrimaryTriage.GetPriorityPatientList((PriorityLevel)i)[0] ) );
 	}
 		
 }
 
+//------------------------------------------------------------------------------------------------------------------------
+//	@	void UI_GetPatient::Action()
+//------------------------------------------------------------------------------------------------------------------------
+//	Initiates the Action 
+//------------------------------------------------------------------------------------------------------------------------
 void UI_GetPatient::Action()
 {
 	Print();
-	UIBase::mHandler.RemoveMostRecent();
+	UIBase::mPrimaryTriage.RemoveMostRecent();
 }

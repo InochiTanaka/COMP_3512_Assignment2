@@ -19,7 +19,7 @@ enum PriorityLevel
 	SERIOUS,
 	GOOD,
 	COMFORTABLE,
-	END	// Used for iteration loop
+	MAX	// Used for iteration loop
 };
 
 #endif

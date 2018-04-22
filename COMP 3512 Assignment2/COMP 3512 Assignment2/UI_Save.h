@@ -7,7 +7,7 @@ class UI_Save : public UIBase
 public:
 	UI_Save(Triage& Triageptr)
 	{
-		UIBase::mHandler = Triageptr;
+		UIBase::mPrimaryTriage = Triageptr;
 	}
 	virtual ~UI_Save() {}
 
