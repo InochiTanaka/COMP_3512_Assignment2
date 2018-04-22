@@ -28,19 +28,18 @@ class Patient;
 class Triage 
 {
 public:
-	Triage() 
-	{
-
-	}
+	Triage() {}
 	~Triage() {}
 
 public:
+
+	// Mutators ------------------------------------------------------------------------------------
 	void Insert(Patient data);
-	void Remove(Patient data);
 	void RemoveMostRecent();
-	bool SearchPatient(std::string str);
 	void UpdateList();
 
+	// Accessor ------------------------------------------------------------------------------------
+	bool SearchPatient(std::string str);
 	Patient& GetPatientByPIN(std::string str);
 
 	std::deque<Patient>& GetPriorityPatientList(PriorityLevel lvl)		{ return mHospitalList.GetList((int)lvl); }

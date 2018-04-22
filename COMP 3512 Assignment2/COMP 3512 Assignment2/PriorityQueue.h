@@ -43,16 +43,14 @@ public:
 	
 	//	Mutators -----------------------------------------------------------------------
 	void AddToList(Patient data, PriorityLevel level);
-	void RemoveFromList(Patient data);
 
-	Patient UpdatePatient(Patient data);
 	void UpdateTime(std::string string);
 
 	//	Accessors ----------------------------------------------------------------------
 	bool Seek(std::string PIN);
 	Patient& GetPatient(std::string PIN);
 
-	void RemoveHigestPriority();							// Pops after a general Update
+	void RemoveHigestPriority();						
 	int GetPatientCount() const							{ return numOfPatient; }
 
 	std::deque<Patient>& GetList(int category) const	{ return mPatientList[category]; }
@@ -61,19 +59,19 @@ public:
 	void FixList();
 	void UpdateList();
 
+private:
+	void UpdateAllPatient();
+	void Promote(PaitentIterator itrPtr, PriorityLevel newLevel, PriorityLevel prev);
 
+#pragma region Variables
 private:
 	int TimeCheck(std::vector<int> time);
 	std::vector<int> GetTime(std::string string);
-
-	void UpdateAllPatient();									// Update After Internal Alterations
-	void Promote(PaitentIterator itrPtr, PriorityLevel newLevel, PriorityLevel prev);
-	//PaitentListIterator Seek();
-
-private:
 	std::vector<int> mCurrentTime;
 	std::deque<Patient>* mPatientList; // 2D Deque
 	int numOfPatient;
+#pragma endregion
+
 };
 
 #endif

@@ -2,23 +2,38 @@
 #ifndef __ASN2_ADDPATIENT_H__
 #define __ASN2_ADDPATIENT_H__
 
+//====================================================================================================
+//	UI_AddPatient.h
+//
+//	The Action of Adding a Patient to the list
+//----------------------------------------------------------------------------------------------------
+//	Inochi Tanaka		Joseph Yang
+//	A00978984			A00950913
+//====================================================================================================
 
+
+//----------------------------------------------------------------------------------------------------
+//-- Dependency --------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------
 
 #include "ProjectIncludes.h"	// So it doesn't looked clumped up
 
 class Patient;
 
+
+//----------------------------------------------------------------------------------------------------
+//-- Class Declerations ------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------
+
+
 class UI_AddPatient : public UIBase
 {
 public:
-	UI_AddPatient(Triage& Triageptr) 
-	{
-		UIBase::mPrimaryTriage = Triageptr;
-	}
+	UI_AddPatient(Triage& Triageptr);
 	virtual ~UI_AddPatient() {}
 
 public:
-	virtual void Print() { /* Empty */ }
+	virtual void Print() {}
 	virtual void Action();
 
 private:
@@ -48,9 +63,6 @@ public:
 	bool checkValidCategory(int cateNum);
 
 	void printPatient(Patient p);
-
-
-
 };
 
 

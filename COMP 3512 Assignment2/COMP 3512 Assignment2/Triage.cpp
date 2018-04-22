@@ -18,7 +18,8 @@
 //------------------------------------------------------------------------------------------------------------------------
 //	Places the patient in the correct Priority
 //------------------------------------------------------------------------------------------------------------------------
-void Triage::Insert(Patient data) 
+void 
+Triage::Insert(Patient data) 
 {
 	//PriorityLevel eStatus = DefineCondition(data);
 	mHospitalList.AddToList(data, (PriorityLevel)data.GetCategory());
@@ -29,18 +30,12 @@ void Triage::Insert(Patient data)
 }
 
 //------------------------------------------------------------------------------------------------------------------------
-//	@	void Triage::Remove(Patient data) 
+//	@	void Triage::RemoveMostRecent()
 //------------------------------------------------------------------------------------------------------------------------
-//	Removes Patient from the list
+//	Removes Highest Priority Patient from the list
 //------------------------------------------------------------------------------------------------------------------------
-void Triage::Remove(Patient data) 
-{
-	mHospitalList.RemoveFromList(data);
-	//mHospitalList.UpdateList();		// Fixes list after change, if needed
-	// Print !!
-}
-
-void Triage::RemoveMostRecent()
+void 
+Triage::RemoveMostRecent()
 {
 	if (mHospitalList.GetPatientCount() > 0)
 		mHospitalList.RemoveHigestPriority();
@@ -48,16 +43,36 @@ void Triage::RemoveMostRecent()
 		std::cout << "No Patient to Attend to currently" << std::endl;
 }
 
-bool Triage::SearchPatient(std::string str)
+//------------------------------------------------------------------------------------------------------------------------
+//	@	bool Triage::SearchPatient(std::string str)
+//------------------------------------------------------------------------------------------------------------------------
+//	Checks if there is such patient with the correct PIN
+//	Prevents null reference returns
+//------------------------------------------------------------------------------------------------------------------------
+bool 
+Triage::SearchPatient(std::string str)
 {
 	return mHospitalList.Seek(str);
 }
 
-Patient& Triage::GetPatientByPIN(std::string str)
+//------------------------------------------------------------------------------------------------------------------------
+//	@	Patient& Triage::GetPatientByPIN(std::string str)
+//------------------------------------------------------------------------------------------------------------------------
+//	Returns the Patient that will need correction/update/editing
+//------------------------------------------------------------------------------------------------------------------------
+Patient& 
+Triage::GetPatientByPIN(std::string str)
 {
 	return mHospitalList.GetPatient(str);
 }
-void Triage::UpdateList()	// Fixes List
+
+//------------------------------------------------------------------------------------------------------------------------
+//	@	void Triage::UpdateList()
+//------------------------------------------------------------------------------------------------------------------------
+//	Fixes List after any update with Time or Category
+//------------------------------------------------------------------------------------------------------------------------
+void 
+Triage::UpdateList()	
 {
 	// Promote Based on Time
 	mHospitalList.UpdateList();
@@ -65,8 +80,4 @@ void Triage::UpdateList()	// Fixes List
 	// Checks if all Patients Category are in the right Category
 	mHospitalList.FixList();
 
-	
-
 }
-
-

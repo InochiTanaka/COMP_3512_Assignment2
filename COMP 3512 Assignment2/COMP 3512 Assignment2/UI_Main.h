@@ -11,7 +11,9 @@ public:
 public:
 	void Print();
 	void Action();
+
 	bool IsRunning() { return bRunning; }
+
 private:
 	bool bRunning;
 	Triage* mTriageHandler;
