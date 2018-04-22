@@ -27,7 +27,7 @@
     <ClCompile Include="TriageTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HosptialUI.cpp">
+    <ClCompile Include="HospitalUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,7 +44,10 @@
     <ClInclude Include="Triage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HosptialUI.h">
+    <ClInclude Include="ProjectIncludes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HospitalUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

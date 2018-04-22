@@ -1,11 +1,11 @@
-#include "HosptialUI.h"
+#include "HospitalUI.h"
 
 // Input Class Should have a local Patient that will be passed afterwards
 
 int main() 
 {
 
-	HosptialUI test;
+	HospitalUI test;
 	
 	std::cout << test.addSequence();
 

@@ -52,6 +52,7 @@ public:
 	Patient GetPatient(std::string name);
 	void UpdateList();
 
+	std::deque<Patient> GetList(int category) { return mPatientList[category]; }
 
 
 public:
@@ -72,6 +73,7 @@ private:
 
 private:
 	std::vector<int> mCurrentTime;
+public: // Temporary
 	std::deque<Patient> mPatientList[]; // 2D Deque
 	
 

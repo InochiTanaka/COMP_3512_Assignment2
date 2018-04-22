@@ -1,24 +1,24 @@
 #pragma once
 
+//====================================================================================================
+//	Hospital UI
+//
+//	UI Handler
+//----------------------------------------------------------------------------------------------------
+//	Inochi Tanaka		Joseph Yang
+//	A00978984			A00950913
+//====================================================================================================
+
+
+#include "ProjectIncludes.h"	// So it doesn't looked clumped up
+
 #include "Patient.h"
+#include "Triage.h"
+
 //#include "PriorityQueue.hpp"
 //#include "PriorityLevel.hpp"
 
-#include<iostream>
-#include <string>
-#include <stdio.h>
 
-#include <iomanip>
-#include <ctime>
-#include <time.h>
-#include <stdlib.h>
-
-#include <string>
-#include <cstring>
-#include <sstream>
-
-#include <vector>
-#include <deque>
 
 #define PIN_LENGTH = 8;
 #define MAX_RESERVATION_MONTH = 3;
@@ -27,7 +27,23 @@
 
 // Inochi's
 
-class HosptialUI
+
+namespace UIState 
+{
+	static enum state
+	{
+		ADD,
+		GET_NEXT_PATIENT,
+		CHANGE_CATEGORY,
+		SAVE,
+		LOAD,
+		PRINT,
+		EXIT
+	};
+	state currentstate = state::ADD;
+};
+
+class HospitalUI
 {
 private:
 	static const int days_in_regular_year[];
@@ -45,6 +61,7 @@ public:
 	Patient inputPatientPIN(Patient p);
 	Patient inputPatientSymptoms(Patient p);
 	Patient inputPatientCategory(Patient p);
+
 	bool checkValidName(std::string fName, std::string lName, std::string mName, int numData);
 	bool checkValidBirthDay(int y, int m, int d);
 	bool checkValidPIN(std::string pin);
@@ -53,5 +70,8 @@ public:
 	bool checkValidCategory(int cateNum);
 
 	void printPatient(Patient p);
+
+
+
 };
 
