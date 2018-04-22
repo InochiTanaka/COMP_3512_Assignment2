@@ -1,5 +1,5 @@
 #include "CppUnitTest.h"
-#include "../COMP 3512 Assignment2/HospitalUI.h"
+#include "../COMP 3512 Assignment2/UI_AddPatient.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -8,7 +8,7 @@ namespace UnitTests
 	TEST_CLASS(UnitTestHosptialUI)
 	{
 	public:
-		HospitalUI unitTestHostpitalUI;
+		UI_AddPatient unitTestHostpitalUI;
 		
 		TEST_METHOD(Test_check_input_name_valid)
 		{
